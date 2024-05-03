@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Aulas
-@endsection
+@section('title', 'UTN Rosario')
+
+@section('content_header')
+    <h1>UTN Rosario</h1>
+@stop
 
 @section('content')
     <div class="container-fluid">
@@ -73,3 +75,13 @@
         </div>
     </div>
 @endsection
+
+@section('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+@stop
+

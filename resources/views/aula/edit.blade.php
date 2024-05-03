@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'UTN Rosario')
+
 
 @section('template_title')
     {{ __('Update') }} Aula
@@ -27,3 +30,12 @@
         </div>
     </section>
 @endsection
+
+@section('css')
+    {{-- Add here extra stylesheets --}}
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+@stop
