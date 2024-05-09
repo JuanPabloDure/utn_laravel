@@ -321,6 +321,11 @@ return [
             'icon' => 'far fa-fw fa-file',
         ],
         [
+            'text' => 'Docentes',
+            'url' => 'docentes',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        [
             'text' => 'Comisiones',
             'url' => 'comisiones',
             'icon' => 'far fa-fw fa-file',
