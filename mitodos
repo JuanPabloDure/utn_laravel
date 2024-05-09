@@ -1,8 +1,14 @@
  1050  vendor/bin/sail artisan make:migration aulas
  1051  vendor/bin/sail migrate:refresh
- 1052  vendor/bin/sail artisan migrate:refresh
+ 1052  vendor/bin/sail artisan migrate:refresh #Refresh lipia todo de la db OJO
  1053  composer require ibex/crud-generator --dev
  1054  vendor/bin/sail composer require ibex/crud-generator --dev
  1055  vendor/bin/sail artisan vendor:publish --tag=laravel-assets --ansi --force
  1056  vendor/bin/sail artisan vendor:publish --tag=crud
  1057  vendor/bin/sail artisan make:crud aulas
+
+
+Creo Migracion
+Creo Modelo
+Migro
+Creo Crud
