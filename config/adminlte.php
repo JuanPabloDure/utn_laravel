@@ -326,6 +326,11 @@ return [
             'icon' => 'far fa-fw fa-file',
         ],
         [
+            'text' => 'Carreras/Especialidades',
+            'url' => 'carreras',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        [
             'text' => 'Comisiones',
             'url' => 'comisiones',
             'icon' => 'far fa-fw fa-file',
