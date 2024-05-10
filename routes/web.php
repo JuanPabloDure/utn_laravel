@@ -15,6 +15,7 @@ Route::resource('carreras', App\Http\Controllers\CarreraController::class);
 Route::resource('asignaturas', App\Http\Controllers\AsignaturaController::class);
 Route::resource('horarios', App\Http\Controllers\HorarioController::class);
 Route::resource('relaciones', App\Http\Controllers\RelacioneController::class);
+Route::resource('roles', App\Http\Controllers\RoleController::class);
 
 
 ##Rutas sefuras

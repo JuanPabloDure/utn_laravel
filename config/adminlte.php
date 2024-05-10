@@ -352,8 +352,8 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
+            'text' => 'Perfiles',
+            'url' => 'roles',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
