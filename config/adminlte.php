@@ -318,17 +318,17 @@ return [
         [
             'text' => 'Aulas',
             'url' => 'aulas',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-chalkboard',
         ],
         [
             'text' => 'Docentes',
             'url' => 'docentes',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fa fa-address-book',
         ],
         [
             'text' => 'Carreras/Especialidades',
             'url' => 'carreras',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-graduation-cap',
         ],
         [
             'text' => 'Asignaturas',
@@ -338,9 +338,18 @@ return [
         [
             'text' => 'Comisiones',
             'url' => 'comisiones',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-chalkboard-teacher',
+        ], 
+        [
+            'text' => 'Horarios dispinibles',
+            'url' => 'horarios',
+            'icon' => 'fas fa-school',
         ],
-
+        [
+            'text' => 'Prueba',
+            'url' => 'relaciones',
+            'icon' => 'fas fa-school',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
