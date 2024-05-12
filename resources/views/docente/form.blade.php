@@ -18,7 +18,7 @@
         </div>
         <div class="form-group mb-2 mb20">
             <label for="activo" class="form-label">{{ __('Activo') }}</label>
-            <input type="checkbox" name="activo" value="{{ old('activo', $docente?->activo) }}" id="activo">
+            <input type="text" name="activo" class="form-control @error('activo') is-invalid @enderror" value="{{ old('activo', $docente?->activo) }}" id="activo" placeholder="Si">
         </div>
 
     </div>

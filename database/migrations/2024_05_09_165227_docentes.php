@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('cargo');
             $table->string('apellido');
-            $table->boolean('activo');
+            $table->string('activo');
             $table->timestamps();
         });
     }

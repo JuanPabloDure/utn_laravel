@@ -30,5 +30,10 @@ class Docente extends Model
      */
     protected $fillable = ['nombre', 'cargo', 'apellido', 'activo'];
 
+    public function getNombreYapellidoAttribute()
+    {
+        return $this->nombre . ' ' . $this->apellido;
+    }
+
 
 }

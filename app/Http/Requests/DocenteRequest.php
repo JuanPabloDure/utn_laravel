@@ -25,7 +25,7 @@ class DocenteRequest extends FormRequest
 			'nombre' => 'required|string',
 			'cargo' => 'required|string',
 			'apellido' => 'required|string',
-			'activo' => 'required',
+			'activo' => 'required|string',
         ];
     }
 }

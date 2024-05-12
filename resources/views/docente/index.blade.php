@@ -39,6 +39,7 @@
 									<th >Nombre</th>
 									<th >Cargo</th>
 									<th >Apellido</th>
+									<th >Nombre y apellido</th>
 									<th >Activo</th>
 
                                         <th></th>
@@ -52,6 +53,7 @@
 										<td >{{ $docente->nombre }}</td>
 										<td >{{ $docente->cargo }}</td>
 										<td >{{ $docente->apellido }}</td>
+										<td >{{ $docente->NombreYapellido }}</td>
 										<td >{{ $docente->activo }}</td>
 
                                             <td>
