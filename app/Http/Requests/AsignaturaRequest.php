@@ -24,6 +24,7 @@ class AsignaturaRequest extends FormRequest
         return [
 			'nombre' => 'required|string',
 			'codigo' => 'required',
+            'activo' => 'required|string',
         ];
     }
 }

@@ -25,6 +25,7 @@ class AulaRequest extends FormRequest
 			'name' => 'required|string',
 			'codigo' => 'required|string',
 			'direccion' => 'required|string',
+			'activo' => 'required|string',
         ];
     }
 }

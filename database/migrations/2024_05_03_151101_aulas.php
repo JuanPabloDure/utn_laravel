@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('codigo')->unique();
             $table->string('direccion');
+            $table->string('activo');
             $table->timestamps();
         });
     }

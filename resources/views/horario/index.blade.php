@@ -39,6 +39,7 @@
 									<th >Nombre</th>
 									<th >Desde</th>
 									<th >Hasta</th>
+									<th >Activo</th>
 
                                         <th></th>
                                     </tr>
@@ -51,6 +52,7 @@
 										<td >{{ $horario->nombre }}</td>
 										<td >{{ $horario->desde }}</td>
 										<td >{{ $horario->hasta }}</td>
+										<td >{{ $horario->activo }}</td>
 
                                             <td>
                                                 <form action="{{ route('horarios.destroy', $horario->id) }}" method="POST">

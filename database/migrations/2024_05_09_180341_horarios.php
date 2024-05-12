@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string ('nombre')->unique();
             $table->string('desde');
             $table->string('hasta');
+            $table->string('activo');
             $table->timestamps();
         });
     }

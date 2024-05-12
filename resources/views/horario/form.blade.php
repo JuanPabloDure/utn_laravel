@@ -16,6 +16,13 @@
             <input type="text" name="hasta" class="form-control @error('hasta') is-invalid @enderror" value="{{ old('hasta', $horario?->hasta) }}" id="hasta" placeholder="Hasta">
             {!! $errors->first('hasta', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+        <div class="form-group mb-2 mb20">
+            <label for="activo" class="form-label">{{ __('Activo') }}</label>
+            <select name="activo" class="form-control @error('activo') is-invalid @enderror" value="{{ old('activo', $horario?->activo) }}" id="activo" placeholder="Si">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        </div>
 
     </div>
     <div class="col-md-12 mt20 mt-2">

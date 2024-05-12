@@ -27,7 +27,7 @@ class Aula extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'codigo', 'direccion'];
+    protected $fillable = ['name', 'codigo', 'direccion', 'activo'];
 
 
 }

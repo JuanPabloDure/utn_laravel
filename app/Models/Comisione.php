@@ -27,7 +27,7 @@ class Comisione extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'codigo', 'tipo'];
+    protected $fillable = ['name', 'codigo', 'tipo', 'activo'];
 
 
 }

@@ -25,6 +25,7 @@ class HorarioRequest extends FormRequest
 			'nombre' => 'required',
 			'desde' => 'required|string',
 			'hasta' => 'required|string',
+            'activo' => 'required|string',
         ];
     }
 }

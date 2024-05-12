@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('carrera');
             $table->string('tipo');
-            $table->boolean('activo');
+            $table->string('activo');
             $table->timestamps();
         });
     }

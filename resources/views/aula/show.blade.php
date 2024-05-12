@@ -28,6 +28,10 @@
                                     <strong>Direccion:</strong>
                                     {{ $aula->direccion }}
                                 </div>
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Activo:</strong>
+                                    {{ $aula->activo }}
+                                </div>
 
                     </div>
                 </div>

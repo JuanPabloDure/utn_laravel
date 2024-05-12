@@ -34,6 +34,10 @@
                                     <strong>Tipo:</strong>
                                     {{ $comisione->tipo }}
                                 </div>
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Activo:</strong>
+                                    {{ $comisione->activo }}
+                                </div>
 
                     </div>
                 </div>

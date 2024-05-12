@@ -25,6 +25,7 @@ class ComisioneRequest extends FormRequest
 			'name' => 'required|string',
 			'codigo' => 'required|string',
 			'tipo' => 'required|string',
+			'activo' => 'required|string',
         ];
     }
 }

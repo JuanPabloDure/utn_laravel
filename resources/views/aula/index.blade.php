@@ -41,6 +41,7 @@
 									<th >Name</th>
 									<th >Codigo</th>
 									<th >Direccion</th>
+									<th >Activa</th>
 
                                         <th></th>
                                     </tr>
@@ -53,6 +54,7 @@
 										<td >{{ $aula->name }}</td>
 										<td >{{ $aula->codigo }}</td>
 										<td >{{ $aula->direccion }}</td>
+										<td >{{ $aula->activo }}</td>
 
                                             <td>
                                                 <form action="{{ route('aulas.destroy', $aula->id) }}" method="POST">

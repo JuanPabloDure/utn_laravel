@@ -28,6 +28,10 @@
                                     <strong>Codigo:</strong>
                                     {{ $asignatura->codigo }}
                                 </div>
+                                <div class="form-group mb-2 mb20">
+                                    <strong>Activo:</strong>
+                                    {{ $asignatura->activo }}
+                                </div>
 
                     </div>
                 </div>

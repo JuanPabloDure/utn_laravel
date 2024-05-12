@@ -52,6 +52,7 @@
 										<td >{{ $comisione->name }}</td>
 										<td >{{ $comisione->codigo }}</td>
 										<td >{{ $comisione->tipo }}</td>
+										<td >{{ $comisione->activo }}</td>
 
                                             <td>
                                                 <form action="{{ route('comisiones.destroy', $comisione->id) }}" method="POST">

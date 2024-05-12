@@ -26,7 +26,7 @@ class Asignatura extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['nombre', 'codigo'];
+    protected $fillable = ['nombre', 'codigo', 'activo'];
 
 
 }

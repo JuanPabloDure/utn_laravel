@@ -38,6 +38,7 @@
                                         
 									<th >Nombre</th>
 									<th >Codigo</th>
+									<th >Activo</th>
 
                                         <th></th>
                                     </tr>
@@ -49,6 +50,7 @@
                                             
 										<td >{{ $asignatura->nombre }}</td>
 										<td >{{ $asignatura->codigo }}</td>
+										<td >{{ $asignatura->activo }}</td>
 
                                             <td>
                                                 <form action="{{ route('asignaturas.destroy', $asignatura->id) }}" method="POST">

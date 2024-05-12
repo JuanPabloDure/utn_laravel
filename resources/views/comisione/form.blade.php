@@ -16,6 +16,14 @@
             <input type="text" name="tipo" class="form-control @error('tipo') is-invalid @enderror" value="{{ old('tipo', $comisione?->tipo) }}" id="tipo" placeholder="Tipo">
             {!! $errors->first('tipo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+        <div class="form-group mb-2 mb20">
+            <label for="activo" class="form-label">{{ __('Activo') }}</label>
+            <select name="activo" class="form-control @error('activo') is-invalid @enderror" value="{{ old('activo', $comisione?->activo) }}" id="activo" placeholder="Si">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+
 
     </div>
     <div class="col-md-12 mt20 mt-2">
