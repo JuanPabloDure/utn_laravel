@@ -16,9 +16,18 @@
             <input type="text" name="apellido" class="form-control @error('apellido') is-invalid @enderror" value="{{ old('apellido', $docente?->apellido) }}" id="apellido" placeholder="Apellido">
             {!! $errors->first('apellido', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+        <!--
         <div class="form-group mb-2 mb20">
             <label for="activo" class="form-label">{{ __('Activo') }}</label>
             <input type="text" name="activo" class="form-control @error('activo') is-invalid @enderror" value="{{ old('activo', $docente?->activo) }}" id="activo" placeholder="Si">
+        </div>
+        -->
+        <div class="form-group mb-2 mb20">
+            <label for="activo" class="form-label">{{ __('Activo') }}</label>
+            <select name="activo" class="form-control @error('activo') is-invalid @enderror" value="{{ old('activo', $docente?->activo) }}" id="activo" placeholder="Si">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
         </div>
 
     </div>
