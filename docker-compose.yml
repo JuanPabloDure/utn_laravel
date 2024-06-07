@@ -27,6 +27,20 @@ services:
             - meilisearch
             - mailpit
             - selenium
+      # Servicio de PHPMyAdmin
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin_container
+        environment:
+            PMA_HOST: mysql
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_USERNAME: "${DB_USERNAME}"
+        ports:
+            - "8081:80"
+        depends_on:
+            - mysql
+        networks:
+            - sail
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
