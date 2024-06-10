@@ -326,6 +326,11 @@ return [
             'icon' => 'fa fa-address-book',
         ],
         [
+            'text' => 'Materias',
+            'url' => 'materias',
+            'icon' => 'fa fa-address-book',
+        ],
+        [
             'text' => 'Carreras/Especialidades',
             'url' => 'carreras',
             'icon' => 'fas fa-graduation-cap',
