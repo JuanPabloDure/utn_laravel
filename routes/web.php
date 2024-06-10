@@ -17,7 +17,7 @@ Route::resource('horarios', App\Http\Controllers\HorarioController::class);
 Route::resource('relaciones', App\Http\Controllers\RelacioneController::class);
 Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::resource('auxiliares', App\Http\Controllers\AuxiliareController::class);
-
+Route::resource('turnos', App\Http\Controllers\TurnoController::class);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

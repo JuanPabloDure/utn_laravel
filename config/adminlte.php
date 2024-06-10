@@ -341,8 +341,8 @@ return [
             'icon' => 'fas fa-chalkboard-teacher',
         ], 
         [
-            'text' => 'Auxiliares',
-            'url' => 'auxiliares',
+            'text' => 'Turnos',
+            'url' => 'turnos',
             'icon' => 'fas fa-chalkboard-teacher',
         ], 
         [
