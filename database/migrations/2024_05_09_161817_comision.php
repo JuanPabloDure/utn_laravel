@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comisiones', function (Blueprint $table) {
-            $table->id();
+            $table->id('idComision');
+            $table->string('comisionNro');
+            $table->string('idTurno');
             $table->string('name');
-            $table->string('codigo')->unique();
+            $table->string('codigo');
             $table->string('tipo');
             $table->string('activo');
-            $table->timestamps();
         });
     }
 

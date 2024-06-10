@@ -21,6 +21,7 @@ class Comisione extends Model
 {
     
     protected $perPage = 20;
+    protected $primaryKey = 'idComision';
 
     /**
      * The attributes that are mass assignable.
