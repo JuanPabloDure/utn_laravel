@@ -341,6 +341,11 @@ return [
             'icon' => 'fas fa-chalkboard-teacher',
         ], 
         [
+            'text' => 'Auxiliares',
+            'url' => 'auxiliares',
+            'icon' => 'fas fa-chalkboard-teacher',
+        ], 
+        [
             'text' => 'Horarios dispinibles',
             'url' => 'horarios',
             'icon' => 'fas fa-school',
