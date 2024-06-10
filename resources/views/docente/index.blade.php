@@ -57,9 +57,9 @@
 										<td >{{ $docente->activo }}</td>
 
                                             <td>
-                                                <form action="{{ route('docentes.destroy', $docente->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('docentes.show', $docente->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('docentes.edit', $docente->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('docentes.destroy', $docente->idDocente) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('docentes.show', $docente->idDocente) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('docentes.edit', $docente->idDocente) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     <!--@csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>

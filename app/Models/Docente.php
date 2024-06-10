@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Docente
  *
- * @property $id
+ * @property $idDocente
  * @property $nombre
  * @property $cargo
  * @property $apellido
@@ -22,6 +22,7 @@ class Docente extends Model
 {
     
     protected $perPage = 20;
+    protected $primaryKey = 'idDocente';
 
     /**
      * The attributes that are mass assignable.

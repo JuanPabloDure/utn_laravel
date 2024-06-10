@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('auxiliares', function (Blueprint $table) {
-            $table->id();
-            $table->string ('Descripcion')->unique();
-            $table->string('codigo');
-            $table->timestamps();
+        Schema::table('docentes', function (Blueprint $table) {
+            //
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('auxiliares');
+        Schema::table('docentes', function (Blueprint $table) {
+            //
+        });
     }
 };

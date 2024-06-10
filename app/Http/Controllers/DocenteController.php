@@ -50,9 +50,9 @@ class DocenteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id): View
+    public function show($idDocente): View
     {
-        $docente = Docente::find($id);
+        $docente = Docente::find($idDocente);
 
         return view('docente.show', compact('docente'));
     }
@@ -60,9 +60,9 @@ class DocenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id): View
+    public function edit($idDocente): View
     {
-        $docente = Docente::find($id);
+        $docente = Docente::find($idDocente);
 
         return view('docente.edit', compact('docente'));
     }
@@ -78,9 +78,9 @@ class DocenteController extends Controller
             ->with('success', 'Docente updated successfully');
     }
 
-    public function destroy($id): RedirectResponse
+    public function destroy($idDocente): RedirectResponse
     {
-        Docente::find($id)->delete();
+        Docente::find($idDocente)->delete();
 
         return Redirect::route('docentes.index')
             ->with('success', 'Docente deleted successfully');

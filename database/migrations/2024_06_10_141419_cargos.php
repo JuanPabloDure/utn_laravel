@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('auxiliares', function (Blueprint $table) {
-            $table->id();
-            $table->string ('Descripcion')->unique();
-            $table->string('codigo');
-            $table->timestamps();
-        });
+        //Schema::create('cargos', function (Blueprint $table) {
+        //    $table->id('idCargo');
+        //    $table->string('nombre');
+        //    $table->timestamps();
+        //});
     }
 
     /**
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('auxiliares');
+        //Schema::dropIfExists('cargos');
     }
 };
