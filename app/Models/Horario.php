@@ -21,13 +21,14 @@ class Horario extends Model
 {
     
     protected $perPage = 20;
+    protected $primaryKey = 'idHorario';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = ['nombre', 'desde', 'hasta', 'activo'];
+    protected $fillable = ['rangoHorario', 'horarioInicio', 'horarioFin', 'hora'];
 
 
 }

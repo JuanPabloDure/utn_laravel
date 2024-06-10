@@ -36,10 +36,11 @@
                                     <tr>
                                         <th>No</th>
                                         
-									<th >Nombre</th>
+								
 									<th >Desde</th>
 									<th >Hasta</th>
-									<th >Activo</th>
+									<th >Hora</th>
+									<th >Turno</th>
 
                                         <th></th>
                                     </tr>
@@ -49,15 +50,16 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-										<td >{{ $horario->nombre }}</td>
-										<td >{{ $horario->desde }}</td>
-										<td >{{ $horario->hasta }}</td>
-										<td >{{ $horario->activo }}</td>
+										
+										<td >{{ $horario->horarioInicio }}</td>
+										<td >{{ $horario->horarioFin }}</td>
+										<td >{{ $horario->hora }}</td>
+										<td >{{ $horario->idTurno }}</td>
 
                                             <td>
-                                                <form action="{{ route('horarios.destroy', $horario->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('horarios.show', $horario->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('horarios.edit', $horario->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('horarios.destroy', $horario->idHorario) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('horarios.show', $horario->idHorario) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('horarios.edit', $horario->idHorario) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
