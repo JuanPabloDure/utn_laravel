@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Turno;
 use App\Models\Horario;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,8 +23,9 @@ class HorarioController extends Controller
     public function index(Request $request): View
     {
         $horarios = Horario::paginate();
+        $turnos = Turno::all();
 
-        return view('horario.index', compact('horarios'))
+        return view('horario.index', compact('horarios','turnos'))//Para que se pueda usar un select
             ->with('i', ($request->input('page', 1) - 1) * $horarios->perPage());
     }
 
@@ -33,9 +34,10 @@ class HorarioController extends Controller
      */
     public function create(): View
     {
+        $turnos = Turno::all();
         $horario = new Horario();
 
-        return view('horario.create', compact('horario'));
+        return view('horario.create', compact('horario','turnos'));
     }
 
     /**
@@ -65,8 +67,9 @@ class HorarioController extends Controller
     public function edit($id): View
     {
         $horario = Horario::find($id);
+        $turnos = Turno::all();
 
-        return view('horario.edit', compact('horario'));
+        return view('horario.edit', compact('horario','turnos'));
     }
 
     /**

@@ -17,6 +17,14 @@
             {!! $errors->first('hora', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
+            <label for="idTurno" class="form-label">{{ __('Turno') }}</label>
+            <select name="idTurno" class="form-control @error('idTurno') is-invalid @enderror" value="{{ old('turno', $horario?->turno) }}" id="idTurno">
+                @foreach ($turnos as $turno)    
+                    <option value="{{ $turno->idTurno }}">{{ $turno->descripcion}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group mb-2 mb20">
             <label for="activo" class="form-label">{{ __('Activo') }}</label>
             <select name="activo" class="form-control @error('activo') is-invalid @enderror" value="{{ old('activo', $horario?->activo) }}" id="activo" placeholder="Si">
                 <option value="Si">Si</option>

@@ -27,5 +27,10 @@ class Turno extends Model
      */
     protected $fillable = ['idTurno', 'descripcion', 'rangoHorario'];
 
+    public function horarios()
+    {
+        return $this->hasMany(Horario::class);
+    }
+
 
 }

@@ -22,10 +22,10 @@ class HorarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'nombre' => 'required',
-			'desde' => 'required|string',
-			'hasta' => 'required|string',
-            'activo' => 'required|string',
+			'horarioInicio' => 'required|string',
+			'horarioFin' => 'required|string',
+			'hora' => 'required|string',
+            'idTurno' => 'required',
         ];
     }
 }

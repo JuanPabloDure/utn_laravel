@@ -54,7 +54,7 @@
 										<td >{{ $horario->horarioInicio }}</td>
 										<td >{{ $horario->horarioFin }}</td>
 										<td >{{ $horario->hora }}</td>
-										<td >{{ $horario->idTurno }}</td>
+										<td >{{ $horario->turnoView->descripcion}}</td>
 
                                             <td>
                                                 <form action="{{ route('horarios.destroy', $horario->idHorario) }}" method="POST">

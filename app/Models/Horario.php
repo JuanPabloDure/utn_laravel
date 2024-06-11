@@ -20,15 +20,26 @@ use Illuminate\Database\Eloquent\Model;
 class Horario extends Model
 {
     
-    protected $perPage = 20;
+    protected $perPage = 50;
     protected $primaryKey = 'idHorario';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = ['rangoHorario', 'horarioInicio', 'horarioFin', 'hora'];
+    protected $fillable = ['rangoHorario', 'horarioInicio', 'horarioFin', 'hora', 'idTurno'];
+
+    public function turno()
+        {
+            return $this->hasOne(Turno::class,'idTurno','idTurno');
+        }
+
+    public function turnoView()
+        {
+            return $this->hasOne(Turno::class,'idTurno','idTurno');
+        }
 
 
 }
