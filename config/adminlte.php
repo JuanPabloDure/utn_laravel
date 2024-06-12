@@ -316,6 +316,11 @@ return [
             'can' => 'manage-blog',
         ],
         [
+            'text' => 'Eventos',
+            'url' => 'eventos',
+            'icon' => 'fas fa-chalkboard',
+        ],
+        [
             'text' => 'Aulas',
             'url' => 'aulas',
             'icon' => 'fas fa-chalkboard',

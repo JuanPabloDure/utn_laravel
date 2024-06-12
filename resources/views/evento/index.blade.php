@@ -49,9 +49,9 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-										<td >{{ $evento->aula_id }}</td>
-										<td >{{ $evento->idDocente }}</td>
-										<td >{{ $evento->idHorario }}</td>
+										<td >{{ $evento->AulaView->name }}</td>
+										<td >{{ $evento->DocenteView->nombre }} {{ $evento->DocenteView->apellido }}</td>
+										<td >{{ $evento->HorarioView->rangoHorario }}</td>
 										<td >{{ $evento->nota }}</td>
 
                                             <td>

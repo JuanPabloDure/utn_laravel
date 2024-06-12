@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Aula;
-
+use App\Models\Docente;
+use App\Models\Horario;
 return new class extends Migration
 {
     /**
@@ -15,8 +16,8 @@ return new class extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Aula::class);
-            $table->foreignId('idDocente');
-            $table->foreignId('idHorario');
+            $table->foreignIdFor(Horario::class);
+            $table->foreignIdFor(Docente::class);
             $table->string('nota')->nullable();
             });
     }

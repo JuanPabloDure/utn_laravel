@@ -28,5 +28,19 @@ class Evento extends Model
      */
     protected $fillable = ['aula_id', 'idDocente', 'idHorario', 'nota'];
 
+    public function AulaView()
+    {
+        return $this->hasOne(Aula::class,'id','aula_id');
+    }
+    public function DocenteView()
+    {
+        return $this->hasOne(Docente::class,'idDocente','idDocente');
+    }
+    public function HorarioView()
+    {
+        return $this->hasOne(Horario::class,'idHorario','idHorario');
+    }
+
+
 
 }
