@@ -24,6 +24,16 @@ class Docente extends Model
     protected $perPage = 20;
     protected $primaryKey = 'idDocente';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Define el orden por defecto
+        static::addGlobalScope('order', function (\Illuminate\Database\Eloquent\Builder $builder) {
+            $builder->orderBy('apellido', 'asc'); // Cambia 'fecha_evento' por el nombre de tu columna y 'asc' por 'desc' si quieres orden descendente
+        });
+    }
+
     /**
      * The attributes that are mass assignable.
      *

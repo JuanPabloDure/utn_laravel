@@ -21,6 +21,16 @@ class Evento extends Model
     public $timestamps = false;
     protected $perPage = 20;
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Define el orden por defecto
+        static::addGlobalScope('order', function (\Illuminate\Database\Eloquent\Builder $builder) {
+            $builder->orderBy('fecha', 'desc'); // Cambia 'fecha_evento' por el nombre de tu columna y 'asc' por 'desc' si quieres orden descendente
+        });
+    }
+
     /**
      * The attributes that are mass assignable.
      *
