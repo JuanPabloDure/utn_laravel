@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\Aula;
+use App\Models\Docente;
+use App\Models\Horario;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventoRequest;
@@ -28,8 +32,12 @@ class EventoController extends Controller
     public function create(): View
     {
         $evento = new Evento();
+        //$evento = Evento::find($id);
+        $aulas = Aula::all();
+        $docentes = Docente::all();
+        $horarios = Horario::all();
 
-        return view('evento.create', compact('evento'));
+        return view('evento.create', compact('evento','aulas','docentes','horarios'));
     }
 
     /**
@@ -59,8 +67,11 @@ class EventoController extends Controller
     public function edit($id): View
     {
         $evento = Evento::find($id);
+        $aulas = Aula::all();
+        $docentes = Docente::all();
+        $horarios = Horario::all();
 
-        return view('evento.edit', compact('evento'));
+        return view('evento.edit', compact('evento','aulas','docentes','horarios'));
     }
 
     /**

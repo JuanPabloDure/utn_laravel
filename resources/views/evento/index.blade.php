@@ -36,10 +36,10 @@
                                     <tr>
                                         <th>No</th>
                                         
-									<th >Aula Id</th>
-									<th >Iddocente</th>
-									<th >Idhorario</th>
-									<th >Nota</th>
+									<th >Aula</th>
+									<th >Docente</th>
+									<th >Horario</th>
+									<th >Fecha</th>
 
                                         <th></th>
                                     </tr>
@@ -52,7 +52,7 @@
 										<td >{{ $evento->AulaView->name }}</td>
 										<td >{{ $evento->DocenteView->nombre }} {{ $evento->DocenteView->apellido }}</td>
 										<td >{{ $evento->HorarioView->rangoHorario }}</td>
-										<td >{{ $evento->nota }}</td>
+										<td >{{ $evento->fecha }}</td>
 
                                             <td>
                                                 <form action="{{ route('eventos.destroy', $evento->id) }}" method="POST">

@@ -25,7 +25,7 @@ class EventoRequest extends FormRequest
 			'aula_id' => 'required',
 			'idDocente' => 'required',
 			'idHorario' => 'required',
-			//'nota' => 'string',
+			'fecha' => 'required',
         ];
     }
 }

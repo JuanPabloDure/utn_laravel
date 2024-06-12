@@ -26,7 +26,7 @@ class Evento extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['aula_id', 'idDocente', 'idHorario', 'nota'];
+    protected $fillable = ['aula_id', 'idDocente', 'idHorario', 'nota','fecha'];
 
     public function AulaView()
     {
