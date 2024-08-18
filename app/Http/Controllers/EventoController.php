@@ -6,6 +6,7 @@ use App\Models\Evento;
 use App\Models\Aula;
 use App\Models\Docente;
 use App\Models\Horario;
+use App\Models\Materia;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,8 +37,9 @@ class EventoController extends Controller
         $aulas = Aula::all();
         $docentes = Docente::all();
         $horarios = Horario::all();
+        $materias = Materia::all();
 
-        return view('evento.create', compact('evento','aulas','docentes','horarios'));
+        return view('evento.create', compact('evento','aulas','docentes','horarios','materias'));
     }
 
     /**
@@ -70,8 +72,9 @@ class EventoController extends Controller
         $aulas = Aula::all();
         $docentes = Docente::all();
         $horarios = Horario::all();
+        $materias = Materia::all();
 
-        return view('evento.edit', compact('evento','aulas','docentes','horarios'));
+        return view('evento.edit', compact('evento','aulas','docentes','horarios','materias'));
     }
 
     /**

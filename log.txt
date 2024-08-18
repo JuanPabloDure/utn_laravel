@@ -1,0 +1,29 @@
+
+   INFO  Running migrations.  
+
+  2024_08_18_174155_add_id_materia_to_eventos_table .............. 4.41ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'idMateria' (Connection: mysql, SQL: alter table `eventos` add `idMateria` bigint unsigned not null)
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:813
+    809▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    810▕                 );
+    811▕             }
+    812▕ 
+  ➜ 813▕             throw new QueryException(
+    814▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    815▕             );
+    816▕         }
+    817▕     }
+
+      [2m+9 vendor frames [22m
+
+  10  database/migrations/2024_08_18_174155_add_id_materia_to_eventos_table.php:14
+      Illuminate\Support\Facades\Facade::__callStatic()
+      [2m+26 vendor frames [22m
+
+  37  artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+

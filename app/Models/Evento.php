@@ -43,7 +43,8 @@ class Evento extends Model
         'nota',
         'fecha',
         'tipo',
-        'dia_semana'];
+        'dia_semana',
+        'idMateria'];
 
     public function AulaView()
     {
@@ -56,6 +57,10 @@ class Evento extends Model
     public function HorarioView()
     {
         return $this->hasOne(Horario::class,'idHorario','idHorario');
+    }
+    public function Materia()
+    {
+        return $this->belongsTo(Materia::class, 'idMateria', 'idMateria');
     }
 
 

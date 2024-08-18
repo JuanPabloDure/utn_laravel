@@ -34,6 +34,15 @@
         </div>
 
         <div class="form-group mb-2 mb20">
+            <label for="idMateria" class="form-label">Materia</label>
+            <select  name="idMateria" class="form-control @error('idMateria') is-invalid @enderror" value="{{ old('idMateria', $evento?->idMateria) }}" id="idMateria">
+                @foreach ($materias as $mat)    
+                    <option value="{{ $mat->idMateria }}">{{ $mat->nombre}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group mb-2 mb20">
             <label for="dias_semana">Dias</label>
             <select name="dia_semana" id="dia_semana" class="form-control" required>
                 <option value="Lunes">Lunes</option>
@@ -71,6 +80,7 @@
     <input type="hidden" id="horario_a" value="{{ old('idHorario', $evento?->idHorario) }}">
     <input type="hidden" id="aula_a" value="{{ old('aula_id', $evento?->aula_id) }}">
     <input type="hidden" id="docente_a" value="{{ old('idDocente', $evento?->idDocente) }}">
+    <input type="hidden" id="materia_a" value="{{ old('Idmateria', $evento?->idMateria) }}">
 </div>
 
 <script>
@@ -80,12 +90,8 @@
     }
 
     function traerCampoViejo(nuevo,viejo) {
-        // Obtener el valor del campo "dia_actual"
         var Viejo = document.getElementById(viejo).value;
-
-        // Obtener el campo select "dia_semana"
         var selectDiaSemana = document.getElementById(nuevo);
-        // Establecer el valor del select en base al valor de "dia_actual"
         selectDiaSemana.value = Viejo;
     }
 
@@ -95,5 +101,6 @@
         traerCampoViejo("aula_id","aula_a")
         traerCampoViejo("idHorario","horario_a")
         traerCampoViejo("idDocente","docente_a")
+        traerCampoViejo("idMateria","materia_a")
     });
 </script>

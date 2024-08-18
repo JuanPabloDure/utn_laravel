@@ -38,6 +38,7 @@
                                         
 									<th >Aula</th>
 									<th >Docente</th>
+                                    <th >Materia</th>
                                     <th >Dia</th>
 									<th >Horario</th>
 									<th >Semestre</th>
@@ -52,7 +53,8 @@
                                         <td>{{ $evento->id }}</td>
 										<td >{{ $evento->AulaView->name }}</td>
 										<td >{{ $evento->DocenteView->nombre }} {{ $evento->DocenteView->apellido }}</td>
-										<td >{{ $evento->dia_semana }}</td>
+										<td >{{ $evento->materia->nombre }}</td>
+                                        <td >{{ $evento->dia_semana }}</td>
 										<td >{{ $evento->HorarioView->rangoHorario }}</td>
 										<td >{{ $evento->tipo }}</td>
 
