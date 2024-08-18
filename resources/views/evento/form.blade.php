@@ -26,7 +26,7 @@
 
         <div class="form-group mb-2 mb20">
             <label for="idDocente" class="form-label">Docente</label>
-            <select name="idDocente" id="idDocente" class="form-control @error('idDocente') is-invalid @enderror" value="{{ old('idDocente', $evento?->idDocente) }}" id="idDocente">
+            <select name="idDocente" id="idDocente" class="form-control @error('idDocente') is-invalid @enderror" value="{{ old('idDocente', $evento?->idDocente) }}">
                 @foreach ($docentes as $docente)    
                     <option value="{{ $docente->idDocente }}">{{ $docente->apellido}}, {{ $docente->nombre}}</option>
                 @endforeach
@@ -70,6 +70,7 @@
     <input type="hidden" id="semestre" value="{{ old('tipo', $evento?->tipo) }}">
     <input type="hidden" id="horario_a" value="{{ old('idHorario', $evento?->idHorario) }}">
     <input type="hidden" id="aula_a" value="{{ old('aula_id', $evento?->aula_id) }}">
+    <input type="hidden" id="docente_a" value="{{ old('idDocente', $evento?->idDocente) }}">
 </div>
 
 <script>
@@ -93,5 +94,6 @@
         traerCampoViejo("tipo","semestre")
         traerCampoViejo("aula_id","aula_a")
         traerCampoViejo("idHorario","horario_a")
+        traerCampoViejo("idDocente","docente_a")
     });
 </script>
