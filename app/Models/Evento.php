@@ -27,7 +27,7 @@ class Evento extends Model
 
         // Define el orden por defecto
         static::addGlobalScope('order', function (\Illuminate\Database\Eloquent\Builder $builder) {
-            $builder->orderBy('fecha', 'desc'); // Cambia 'fecha_evento' por el nombre de tu columna y 'asc' por 'desc' si quieres orden descendente
+            $builder->orderBy('idHorario', 'asc'); // Cambia 'fecha_evento' por el nombre de tu columna y 'asc' por 'desc' si quieres orden descendente
         });
     }
 
@@ -36,7 +36,14 @@ class Evento extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['aula_id', 'idDocente', 'idHorario', 'nota','fecha'];
+    protected $fillable = [
+        'aula_id', 
+        'idDocente', 
+        'idHorario', 
+        'nota',
+        'fecha',
+        'tipo',
+        'dia_semana'];
 
     public function AulaView()
     {

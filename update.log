@@ -50,3 +50,6 @@ Dockerfile:55
 --------------------
 ERROR: failed to solve: process "/bin/sh -c groupadd --force -g $WWWGROUP sail" did not complete successfully: exit code: 3
 Service 'laravel.test' failed to build : Build failed
+
+
+

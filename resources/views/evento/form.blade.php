@@ -5,13 +5,16 @@
             <input type="date" name="fecha" class="form-control @error('fecha') is-invalid @enderror" value="{{ old('fecha', $evento?->fecha) }}" id="fecha">
             {!! $errors->first('fecha', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
-        <!--
+
         <div class="form-group mb-2 mb20">
-            <label for="aula_id" class="form-label">Aula</label>
-            <input type="text" name="aula_id" class="form-control @error('aula_id') is-invalid @enderror" value="{{ old('aula_id', $evento?->aula_id) }}" id="aula_id" placeholder="Aula Id">
-            {!! $errors->first('aula_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+            <label for="tipo">Tipo</label>
+            <select name="tipo" id="tipo" class="form-control" required>
+                <option value="anual">Anual</option>
+                <option value="primer">Primer Semestre</option>
+                <option value="segundo">Segundo Semestre</option>
+            </select>
         </div>
-        -->
+
         <div class="form-group mb-2 mb20">
             <label for="aula_id" class="form-label">Aula</label>
             <select name="aula_id" class="form-control @error('aula_id') is-invalid @enderror" value="{{ old('aula_id', $evento?->aula_id) }}" id="aula_id">
@@ -20,13 +23,7 @@
                 @endforeach
             </select>
         </div>
-        <!--
-        <div class="form-group mb-2 mb20">
-            <label for="id_docente" class="form-label">Docente</label>
-            <input type="text" name="idDocente" class="form-control @error('idDocente') is-invalid @enderror" value="{{ old('idDocente', $evento?->idDocente) }}" id="id_docente" placeholder="Iddocente">
-            {!! $errors->first('idDocente', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        -->
+
         <div class="form-group mb-2 mb20">
             <label for="idDocente" class="form-label">Docente</label>
             <select name="idDocente" class="form-control @error('idDocente') is-invalid @enderror" value="{{ old('idDocente', $evento?->idDocente) }}" id="idDocente">
@@ -35,13 +32,20 @@
                 @endforeach
             </select>
         </div>
-        <!--
+
         <div class="form-group mb-2 mb20">
-            <label for="id_horario" class="form-label">Horario</label>
-            <input type="text" name="idHorario" class="form-control @error('idHorario') is-invalid @enderror" value="{{ old('idHorario', $evento?->idHorario) }}" id="id_horario" placeholder="Idhorario">
-            {!! $errors->first('idHorario', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+            <label for="dias_semana">Dias</label>
+            <select name="dia_semana" id="dias_semana" class="form-control" required>
+                <option value="Lunes">Lunes</option>
+                <option value="Martes">Martes</option>
+                <option value="Miércoles">Miércoles</option>
+                <option value="Jueves">Jueves</option>
+                <option value="Viernes">Viernes</option>
+                <option value="Sábado">Sábado</option>
+                <option value="Domingo">Domingo</option>
+            </select>
         </div>
-        -->
+
         <div class="form-group mb-2 mb20">
             <label for="idHorario" class="form-label">Horario</label>
             <select name="idHorario" class="form-control @error('idHorario') is-invalid @enderror" value="{{ old('idHorario', $evento?->idHorario) }}" id="idHorario">
@@ -50,6 +54,7 @@
                 @endforeach
             </select>
         </div>
+
         <div class="form-group mb-2 mb20">
             <label for="nota" class="form-label">Nota</label>
             <input type="text" name="nota" class="form-control @error('nota') is-invalid @enderror" value="{{ old('nota', $evento?->nota) }}" id="nota" placeholder="Nota">

@@ -38,8 +38,9 @@
                                         
 									<th >Aula</th>
 									<th >Docente</th>
+                                    <th >Dia</th>
 									<th >Horario</th>
-									<th >Fecha</th>
+									<th >Semestre</th>
 
                                         <th></th>
                                     </tr>
@@ -51,8 +52,10 @@
                                             
 										<td >{{ $evento->AulaView->name }}</td>
 										<td >{{ $evento->DocenteView->nombre }} {{ $evento->DocenteView->apellido }}</td>
+										<td >{{ $evento->dia_semana }}</td>
 										<td >{{ $evento->HorarioView->rangoHorario }}</td>
-										<td >{{ $evento->fecha }}</td>
+										<td >{{ $evento->tipo }}</td>
+
 
                                             <td>
                                                 <form action="{{ route('eventos.destroy', $evento->id) }}" method="POST">

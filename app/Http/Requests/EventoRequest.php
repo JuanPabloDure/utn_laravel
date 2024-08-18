@@ -25,7 +25,9 @@ class EventoRequest extends FormRequest
 			'aula_id' => 'required',
 			'idDocente' => 'required',
 			'idHorario' => 'required',
-			'fecha' => 'required',
+			'fecha' => 'nullable|date',
+            'tipo' => 'required|in:anual,primer,segundo',
+            'dia_semana' => 'required|in:Lunes,Martes,Miércoles,Jueves,Viernes,Sábado,Domingo'
         ];
     }
 }
