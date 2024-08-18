@@ -34,7 +34,7 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
+                                        <th>Id</th>
                                         
 									<th >Aula</th>
 									<th >Docente</th>
@@ -48,8 +48,8 @@
                                 <tbody>
                                     @foreach ($eventos as $evento)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
+                                        <!--<td>{{ ++$i }}</td>-->
+                                        <td>{{ $evento->id }}</td>
 										<td >{{ $evento->AulaView->name }}</td>
 										<td >{{ $evento->DocenteView->nombre }} {{ $evento->DocenteView->apellido }}</td>
 										<td >{{ $evento->dia_semana }}</td>
