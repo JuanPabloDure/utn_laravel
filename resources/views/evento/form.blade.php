@@ -73,7 +73,7 @@
     </div>
     <div class="col-md-12 mt20 mt-2">
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-        <button class="btn btn-danger" onclick="window.location.href='/eventos'"> Cancelar </button>
+        <button id="cancelButton" class="btn btn-danger"> Cancelar </button> <!--onclick="window.location.href='/eventos'"-->
     </div>
     <input type="hidden" id="dia_actual" value="{{ old('dia_semana', $evento?->dia_semana) }}">
     <input type="hidden" id="semestre" value="{{ old('tipo', $evento?->tipo) }}">
@@ -85,7 +85,7 @@
 
 <script>
     function eliminarCampo(idCampo) {
-        var campo = document.getElementById(IdCampo);
+        var campo = document.getElementById(idCampo);
         campo.parentNode.removeChild(campo);
     }
 
@@ -93,6 +93,11 @@
         var Viejo = document.getElementById(viejo).value;
         var selectDiaSemana = document.getElementById(nuevo);
         selectDiaSemana.value = Viejo;
+        try {
+            eliminarCampo(viejo);//Para evitar confuncion 
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -103,4 +108,9 @@
         traerCampoViejo("idDocente","docente_a")
         traerCampoViejo("idMateria","materia_a")
     });
+
+    document.getElementById('cancelButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Evita el comportamiento por defecto del botón
+        window.history.back();  // Regresa a la página anterior
+        });
 </script>
