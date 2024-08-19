@@ -145,7 +145,8 @@
                 resultadosDiv.textContent = data.message; // Muestra el mensaje si no hay resultados
             } else {
                 data.data.forEach(evento => {
-                    limpiarYCrearDiv(evento.idMateria, evento.idDocente, evento.dia_semana, evento.idHorario )
+                    let materia = obtenerTextoDeSeleccion("idMateria",evento.idMateria)
+                    limpiarYCrearDiv(materia, evento.idDocente, evento.dia_semana, evento.idHorario )
                     var tmp = `Docente: ${evento.idDocente}, Materia: ${evento.idMateria}`;
                     console.log(tmp)
                 });
@@ -163,6 +164,18 @@
     idDocenteSelect.addEventListener('change', realizarConsulta);
     });
 
+    function obtenerTextoDeSeleccion(idSelect, Valor) {
+        // Encuentra el elemento select por su ID
+        let valor = Valor.toString();
+        const selectElement = document.getElementById(idSelect);
+        console.log(idSelect + " "+ valor)
+
+        // Busca el option que tenga el valor especificado
+        const option = Array.from(selectElement.options).find(option => option.value === valor);
+        // Devuelve el texto del option encontrado o un mensaje por defecto
+        return option ? option.textContent : 'Opción no encontrada';
+    }
+
     function limpiarYCrearDiv(titulo, texto, dia, hora) {
         // Selecciona todos los divs con los atributos especificados
         const divs = document.querySelectorAll(`div[dia="${dia}"][hora="${hora}"]`);
@@ -175,14 +188,14 @@
         const nuevoDiv = document.createElement('div');
 
         // Crea el título y el texto
-        const h3 = document.createElement('h3');
-        h3.textContent = titulo;
-        const h5 = document.createElement('h5');
-        h5.textContent = texto;
+        const h6 = document.createElement('h6');
+        h6.textContent = titulo;
+        const h8 = document.createElement('h8');
+        h8.textContent = texto;
 
         // Añade el título y el texto al nuevo div
-        nuevoDiv.appendChild(h3);
-        nuevoDiv.appendChild(h5);
+        nuevoDiv.appendChild(h6);
+        nuevoDiv.appendChild(h8);
 
         // Añade el nuevo div al body (o a un contenedor específico)
         divs.forEach(div => div.appendChild(nuevoDiv));
