@@ -37,6 +37,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $eventos = Evento::all();
+        $aulas = Aula::all();
+        $docentes = Docente::all();
+        $horarios = Horario::all();
+        $materias = Materia::all();
+        return view('home', compact('eventos','aulas','docentes','horarios','materias'));
     }
 }
