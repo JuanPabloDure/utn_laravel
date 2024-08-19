@@ -38,6 +38,9 @@
                             </div>
                         </div>
                     </div>
+                    <div id="resultados">
+
+                    </div>
 
                     <div class="card-body bg-white">
                         <div class="table-responsive">
@@ -111,9 +114,53 @@
                 ocultarElemento()
             });
 
-            document.getElementById('cancelButton').addEventListener('click', function(event) {
-                event.preventDefault(); // Evita el comportamiento por defecto del botón
-                window.history.back();  // Regresa a la página anterior
+            
+
+    document.addEventListener('DOMContentLoaded', function() {
+    
+    const idMateriaSelect = document.getElementById('idMateria');
+    const idDocenteSelect = document.getElementById('idDocente');
+    const resultadosDiv = document.getElementById('resultados');
+
+    function realizarConsulta() {
+        const idMateria = idMateriaSelect.value;
+        const idDocente = idDocenteSelect.value;
+
+        fetch('/api_v1/consulta_home', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                idMateria: idMateria,
+                idDocente: idDocente
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Lógica para redibujar la vista con los datos recibidos
+            resultadosDiv.innerHTML = '';
+
+            if (data.data.length === 0) {
+                resultadosDiv.textContent = data.message; // Muestra el mensaje si no hay resultados
+            } else {
+                data.data.forEach(evento => {
+                    const eventoElement = document.createElement('div');
+                    eventoElement.textContent = `Docente: ${evento.idDocente}, Materia: ${evento.idMateria}`;
+                    console.log(evento)
+                    resultadosDiv.appendChild(eventoElement);
                 });
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    idMateriaSelect.addEventListener('change', realizarConsulta);
+    idDocenteSelect.addEventListener('change', realizarConsulta);
+    });
+
+
+
     </script>
 @stop

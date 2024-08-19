@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ConsultaHomeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,3 +24,5 @@ Route::resource('eventos', App\Http\Controllers\EventoController::class);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth')->post('/api_v1/consulta_home', [ConsultaHomeController::class, 'consulta']);
