@@ -32,6 +32,15 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group mb-2 mb20" style="display: flex; align-items: center;">
+                                    <label for="aula_id" class="form-label" style="margin-right: 10px;">Aula:</label>
+                                    <select id="aula_id" name="aula_id" class="form-control" style="margin-right: 10px;" >
+                                        <option value="0">Selecione un aula</option>
+                                        @foreach ($aulas as $aula)    
+                                            <option value="{{ $aula->id }}">{{ $aula->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <!--<div class="float-right">
                                 <button class="btn btn-sm btn-primary"> Buscar</button>
@@ -145,10 +154,13 @@
                 resultadosDiv.textContent = data.message; // Muestra el mensaje si no hay resultados
             } else {
                 data.data.forEach(evento => {
+                    console.log(evento)
                     let materia = obtenerTextoDeSeleccion("idMateria",evento.idMateria)
-                    limpiarYCrearDiv(materia, evento.idDocente, evento.dia_semana, evento.idHorario )
-                    var tmp = `Docente: ${evento.idDocente}, Materia: ${evento.idMateria}`;
-                    console.log(tmp)
+                    let docente = obtenerTextoDeSeleccion("idDocente",evento.idDocente)
+                    let aula    = "Aula : " + obtenerTextoDeSeleccion("aula_id",evento.aula_id) + " " + evento.dia_semana
+                    let tipo    = "Semestre : " + evento.tipo
+                    let nota    = evento.nota ? "Nota : " + evento.nota : null;
+                    limpiarYCrearDiv(materia, [docente,aula,tipo], evento.dia_semana, evento.idHorario )
                 });
                 //////////////////////////////COMENTAR EN PRODUCCION//////////////////////////////////////////
                 const eventoElement = document.createElement('div');
@@ -168,7 +180,7 @@
         // Encuentra el elemento select por su ID
         let valor = Valor.toString();
         const selectElement = document.getElementById(idSelect);
-        console.log(idSelect + " "+ valor)
+        //console.log(idSelect + " "+ valor)
 
         // Busca el option que tenga el valor especificado
         const option = Array.from(selectElement.options).find(option => option.value === valor);
@@ -181,21 +193,37 @@
         const divs = document.querySelectorAll(`div[dia="${dia}"][hora="${hora}"]`);
 
         // Elimina los divs encontrados
-        divs.forEach(div => div.textContent = '');
+        //divs.forEach(div => div.textContent = '');
+        divs.forEach(div => {
+            if (div.textContent === '-') {
+                div.textContent = '';
+            }
+        });
         //Lo movi a otra funcion mira a bajo
 
         // Crea un nuevo div
         const nuevoDiv = document.createElement('div');
-
-        // Crea el título y el texto
-        const h6 = document.createElement('h6');
-        h6.textContent = titulo;
-        const h8 = document.createElement('h8');
-        h8.textContent = texto;
-
+        nuevoDiv.style.backgroundColor = generarColorClaroAleatorio(); // Aplica el color de fondo
+        nuevoDiv.style.borderRadius = '10px'; // Redondea los bordes del div
+        nuevoDiv.style.padding = '10px'; // Añade un poco de espacio interno (opcional)
+        // Crea el título
+        const h5 = document.createElement('h5');
+        h5.textContent = titulo;
+        // Estilo para limitar a 20 caracteres por línea
+        h5.style.width = '20ch';  // Limita el ancho del contenedor a 20 caracteres
+        h5.style.whiteSpace = 'normal';  // Permite que el texto se envuelva en nuevas líneas
+        h5.style.wordWrap = 'break-word';  // Corta palabras si es necesario para ajustarse al ancho
         // Añade el título y el texto al nuevo div
-        nuevoDiv.appendChild(h6);
-        nuevoDiv.appendChild(h8);
+        nuevoDiv.appendChild(h5);
+        //Añado las lineas de texto
+        texto.forEach(Texto => {
+            let h8 = document.createElement('span');
+            h8.textContent = Texto;
+            h8.style.display = 'block'; // Forzar que cada span ocupe una línea
+            if (Texto) {
+                nuevoDiv.appendChild(h8);
+            }
+            });
 
         // Añade el nuevo div al body (o a un contenedor específico)
         divs.forEach(div => div.appendChild(nuevoDiv));
@@ -211,6 +239,14 @@
             div => div.remove() //Elimino las busquedas anteriores
             div.textContent = '-';//Pongo el mismo texto defecto que puse en php
         });
+    }
+
+    function generarColorClaroAleatorio() {
+        const r = Math.floor(Math.random() * 156) + 100; // Rango de 100 a 255
+        const g = Math.floor(Math.random() * 156) + 100; // Rango de 100 a 255
+        const b = Math.floor(Math.random() * 156) + 100; // Rango de 100 a 255
+
+        return `rgb(${r}, ${g}, ${b})`;
     }
 
     </script>
