@@ -100,6 +100,13 @@
         }
     }
 
+    function ocultarElemento() {
+    var elemento = document.querySelector('.nav-link[data-widget="navbar-search"]');
+    if (elemento) {
+        elemento.style.display = 'none';
+    }
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         traerCampoViejo("dia_semana","dia_actual")
         traerCampoViejo("tipo","semestre")
@@ -107,6 +114,7 @@
         traerCampoViejo("idHorario","horario_a")
         traerCampoViejo("idDocente","docente_a")
         traerCampoViejo("idMateria","materia_a")
+        ocultarElemento()
     });
 
     document.getElementById('cancelButton').addEventListener('click', function(event) {
