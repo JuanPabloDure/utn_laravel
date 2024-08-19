@@ -33,13 +33,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="float-right">
+                            <!--<div class="float-right">
                                 <button class="btn btn-sm btn-primary"> Buscar</button>
-                            </div>
+                            </div>-->
                         </div>
-                    </div>
-                    <div id="resultados">
-
+                        <div id="resultados"></div>
                     </div>
 
                     <div class="card-body bg-white">
@@ -62,25 +60,25 @@
                                         <tr>
                                             <td >{{ $horario->rangoHorario }}</td>
                                             <td >
-                                                <div dia="Lunes" hora="{{ $horario->idHorario }}"> - </div>
+                                                <div dub="calendario" dia="Lunes" hora="{{ $horario->idHorario }}"> - </div>
                                             </td>
                                             <td >
-                                                <div dia="Martes" hora="{{ $horario->idHorario }}"> - </div>
+                                                <div dub="calendario" dia="Martes" hora="{{ $horario->idHorario }}"> - </div>
                                             </td>
                                             <td >
-                                                <div dia="Miércoles" hora="{{ $horario->idHorario }}"> - </div>
+                                                <div dub="calendario"  dia="Miércoles" hora="{{ $horario->idHorario }}"> - </div>
                                             </td>
                                             <td >
-                                                <div dia="Jueves" hora="{{ $horario->idHorario }}"> - </div>
+                                                <div dub="calendario"  dia="Jueves" hora="{{ $horario->idHorario }}"> - </div>
                                             </td>
                                             <td >
-                                                <div dia="Viernes" hora="{{ $horario->idHorario }}"> - </div>
+                                                <div dub="calendario"  dia="Viernes" hora="{{ $horario->idHorario }}"> - </div>
                                             </td>
                                             <td >
-                                                <div dia="Sábado" hora="{{ $horario->idHorario }}"> - </div>
+                                                <div dub="calendario"  dia="Sábado" hora="{{ $horario->idHorario }}"> - </div>
                                             </td>
                                             <td >
-                                                <div dia="Domingo" hora="{{ $horario->idHorario }}"> - </div>
+                                                <div dub="calendario"  dia="Domingo" hora="{{ $horario->idHorario }}"> - </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -125,6 +123,7 @@
     function realizarConsulta() {
         const idMateria = idMateriaSelect.value;
         const idDocente = idDocenteSelect.value;
+        resetearContenidoACalendarios()
 
         fetch('/api_v1/consulta_home', {
             method: 'POST',
@@ -146,11 +145,15 @@
                 resultadosDiv.textContent = data.message; // Muestra el mensaje si no hay resultados
             } else {
                 data.data.forEach(evento => {
-                    const eventoElement = document.createElement('div');
-                    eventoElement.textContent = `Docente: ${evento.idDocente}, Materia: ${evento.idMateria}`;
-                    console.log(evento)
-                    resultadosDiv.appendChild(eventoElement);
+                    limpiarYCrearDiv(evento.idMateria, evento.idDocente, evento.dia_semana, evento.idHorario )
+                    var tmp = `Docente: ${evento.idDocente}, Materia: ${evento.idMateria}`;
+                    console.log(tmp)
                 });
+                //////////////////////////////COMENTAR EN PRODUCCION//////////////////////////////////////////
+                const eventoElement = document.createElement('div');
+                eventoElement.textContent = "Se encontraron resultados";
+                resultadosDiv.appendChild(eventoElement);
+                ////////////////////////////////////////////////////////////////////////////////////////////
             }
         })
         .catch(error => console.error('Error:', error));
@@ -160,7 +163,42 @@
     idDocenteSelect.addEventListener('change', realizarConsulta);
     });
 
+    function limpiarYCrearDiv(titulo, texto, dia, hora) {
+        // Selecciona todos los divs con los atributos especificados
+        const divs = document.querySelectorAll(`div[dia="${dia}"][hora="${hora}"]`);
 
+        // Elimina los divs encontrados
+        divs.forEach(div => div.textContent = '');
+        //Lo movi a otra funcion mira a bajo
+
+        // Crea un nuevo div
+        const nuevoDiv = document.createElement('div');
+
+        // Crea el título y el texto
+        const h3 = document.createElement('h3');
+        h3.textContent = titulo;
+        const h5 = document.createElement('h5');
+        h5.textContent = texto;
+
+        // Añade el título y el texto al nuevo div
+        nuevoDiv.appendChild(h3);
+        nuevoDiv.appendChild(h5);
+
+        // Añade el nuevo div al body (o a un contenedor específico)
+        divs.forEach(div => div.appendChild(nuevoDiv));
+        //document.body.appendChild(nuevoDiv);
+    }
+
+    function resetearContenidoACalendarios() {
+        // Selecciona todos los divs con el atributo dub="calendario"
+        const calendarios = document.querySelectorAll('div[dub="calendario"]');
+
+        // Reemplaza el contenido de cada div con un "-"
+        calendarios.forEach(div => {
+            div => div.remove() //Elimino las busquedas anteriores
+            div.textContent = '-';//Pongo el mismo texto defecto que puse en php
+        });
+    }
 
     </script>
 @stop
