@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", function() {
         if (isExactButtonPresent()) {
             console.log('El botón exacto está presente y es el único.');
             addDomainCheckbox();
+            agregarListenerDominio();
+            setupSubmitButton();
+            ocultarDivFooter();
         } else {
             console.log('El botón exacto no está presente o no es el único.');
         }
@@ -18,6 +21,35 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("El elemento con la clase 'login-box' NO está presente.");
     }
 });
+
+function agregarListenerDominio() {
+
+        let useDomainCheckbox = document.getElementById('use_domain');
+    
+        if (useDomainCheckbox) {
+            // Agrega un listener para el evento 'change'
+            useDomainCheckbox.addEventListener('change', function() {
+                // Verifica si el checkbox está marcado o no
+                let isChecked = useDomainCheckbox.checked;
+                if (isChecked) {
+                    ocultarDivFooter();
+                } else {
+                    mostrarDivFooter();
+                }
+                console.log('Estado del checkbox "Usar Dominio UTN FRRO":', isChecked);
+            });
+        } else {
+            console.log('No se encontró el checkbox "use_domain".');
+        }
+
+
+}
+
+
+function UseLdapUtn() {
+    console.log('Ejecutando UseLdapUtn...');
+    // Aquí va el código de la función UseLdapUtn
+}
 
 function isExactButtonPresent() {
     // Selecciona todos los botones en el documento
@@ -94,6 +126,60 @@ function addDomainCheckbox() {
         console.log('No se encontró el contenedor de la fila.');
     }
 }
+
+function setupSubmitButton() {
+    // Función a ejecutar cuando el botón es clickeado
+
+    // Función para manejar el click en el botón
+    function handleButtonClick(event) {
+        // Selecciona el input checkbox por su ID
+        let useDomainCheckbox = document.getElementById('use_domain');
+        
+        if (useDomainCheckbox) {
+            if (useDomainCheckbox.checked) {
+                // Si use_domain es true, ejecuta UseLdapUtn y previene el envío del formulario
+                event.preventDefault();
+                UseLdapUtn();
+            } else {
+                // Si use_domain es false, el formulario se envía normalmente
+                // No se hace nada adicional, el formulario se enviará automáticamente
+            }
+        } else {
+            console.log('No se encontró el checkbox "use_domain".');
+        }
+    }
+
+    // Selecciona el botón por su tipo y clase
+    let submitButton = document.querySelector('button[type="submit"]');
+
+    if (submitButton) {
+        // Agrega el listener para el evento 'click'
+        submitButton.addEventListener('click', handleButtonClick);
+    } else {
+        console.log('No se encontró el botón de envío.');
+    }
+}
+
+// Función para ocultar la div .card-footer
+function ocultarDivFooter() {
+    let cardFooter = document.querySelector('.card-footer');
+    if (cardFooter) {
+      cardFooter.style.display = 'none'; // Oculta la div
+    } else {
+      console.log('No se encontró la div con clase "card-footer".');
+    }
+  }
+  
+  // Función para mostrar la div .card-footer
+  function mostrarDivFooter() {
+    let cardFooter = document.querySelector('.card-footer');
+    if (cardFooter) {
+      cardFooter.style.display = 'block'; // Muestra la div
+    } else {
+      console.log('No se encontró la div con clase "card-footer".');
+    }
+  }
+
 
 
 
