@@ -413,6 +413,16 @@ return [
     */
 
     'plugins' => [
+        'LoginLdapUTN' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'js/custom-login.js',
+                ],
+            ],
+        ],
         'Datatables' => [
             'active' => false,
             'files' => [
