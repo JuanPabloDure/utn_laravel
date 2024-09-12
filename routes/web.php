@@ -26,3 +26,5 @@ Route::resource('eventos', App\Http\Controllers\EventoController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->post('/api_v1/consulta_home', [ConsultaHomeController::class, 'consulta']);
+
+Route::post('/ldap-login', [ App\Http\Controllers\LdapAuthController::class, 'login'])->name('ldap.login');

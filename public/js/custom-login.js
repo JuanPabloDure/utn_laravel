@@ -49,7 +49,45 @@ function agregarListenerDominio() {
 function UseLdapUtn() {
     console.log('Ejecutando UseLdapUtn...');
     // Aquí va el código de la función UseLdapUtn
+    enviarLogin();
 }
+
+async function enviarLogin() {
+    // Datos que vamos a enviar en el POST, obteniendo los campos por name
+    const datos = {
+       user: document.querySelector('input[name="email"]').value,
+       password: document.querySelector('input[name="password"]').value,
+    };
+
+    try {
+       // Obtener el token CSRF de la meta etiqueta
+       const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+       // Hacemos la solicitud POST usando fetch
+       const respuesta = await fetch("/ldap-login", {
+          method: 'POST', // Tipo de solicitud
+          headers: {
+             'Content-Type': 'application/json', // Los datos se envían como JSON
+             'X-CSRF-TOKEN': csrfToken // Agregar el token CSRF dinámicamente
+          },
+          body: JSON.stringify(datos) // Convertir los datos en formato JSON
+       });
+
+       // Verificamos si la respuesta es exitosa
+       const data = await respuesta.json(); // Procesamos la respuesta en formato JSON
+       if (respuesta.ok) {
+          console.log('Login correcto:', data);
+          // Puedes redirigir o realizar alguna acción en caso de éxito
+          window.location.href = '/proceso.php?op=home';
+       } else {
+          //const data = await respuesta.json(); // Procesamos la respuesta en formato JSON
+          //console.error('Error en la solicitud:' + respuesta.message + respuesta.error , respuesta.status);
+          alert('Error al iniciar sesión.' + respuesta.message + respuesta.error , respuesta.status );
+       }
+    } catch (error) {
+       console.error('Error de red:' + respuesta.message + respuesta.error , respuesta.status, error);
+    }
+ }
 
 function isExactButtonPresent() {
     // Selecciona todos los botones en el documento
