@@ -83,6 +83,11 @@ if (isset($_POST["procesar"])) {
 
                      $ldap_dn = $dn_user;
                      $ldap_password = $passWord;
+                     //ldapsearch -x -H ldap://rosario.frro.utn.edu.ar -b "<BASE_DN>" -D "<BIND_DN>" -w "<PASSWORD>"
+                     //ldapsearch -x -H ldap://rosario.frro.utn.edu.ar -D "cn=admin,dc=example,dc=com" -w "password" -b "dc=example,dc=com"
+                     //ldapsearch -x -H ldap://rosario.frro.utn.edu.ar -D "cn=admin,dc=rosario,dc=frro,dc=utn,dc=edu,dc=ar" -w "yourpassword" -b "dc=rosario,dc=frro,dc=utn,dc=edu,dc=ar"
+                     //ldapsearch -x -H ldap://rosario.frro.utn.edu.ar -D "CN=Portal Intranet Soporte,OU=Cuentas de Servicios,OU=Admin,DC=rosario,DC=frro,DC=utn,DC=edu,DC=ar" -w "M5IM5SjOw7OC" -b "DC=rosario,DC=frro,DC=utn,DC=edu,DC=ar"
+
 
                      // Datos del Servidor
                      $ldap_con = ldap_connect("rosario.frro.utn.edu.ar");
