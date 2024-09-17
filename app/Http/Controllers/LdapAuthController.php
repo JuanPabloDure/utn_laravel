@@ -36,13 +36,27 @@ class LdapAuthController extends Controller
             }
 
             // Datos para la autenticación en LDAP
-            $userName = $userRow->userName;
+            $userName = $userRow->name;
             $password = $request->input('password');
             $ldapHost = env('LDAP_HOST');
             $ldapPort = env('LDAP_PORT');
             $ldapBindDn = env('LDAP_BIND_DN');
             $ldapPassword = env('LDAP_PASSWORD');
             $ldapBaseDn = env('LDAP_BASE_DN');
+            $Sistema    = env('APP_NAME');
+            $TestUser   = env("LDAP_TEST_USER");
+            $Landing    = env("LDAP_LANDING");
+
+
+            ///CODIGO PARA USUARIO DE DESARROLLO SE DEFINE EN .env
+            if ($TestUser && $TestUser === $request->input('user')) {                                     
+                Auth::loginUsingId($userRow->id);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Autenticación exitosa.',
+                    'url'     => $Landing
+                ], 200);
+            }
 
             // Conexión al servidor LDAP
             $ldapCon = ldap_connect($ldapHost, $ldapPort);
@@ -64,18 +78,24 @@ class LdapAuthController extends Controller
                         Auth::loginUsingId($userRow->id);
 
                         // Guardar datos del usuario en sesión
-                        session([
-                            'utnfrro_SistemaAlumnado_user_login_session' => true,
-                            'utnfrro_SistemaAlumnado_idUsuario' => $userRow->id,
-                            'utnfrro_SistemaAlumnado_USERNAME' => $userRow->userName,
-                            'utnfrro_SistemaAlumnado_nombre' => $userRow->nombre,
-                            'utnfrro_SistemaAlumnado_apellido' => $userRow->apellido,
-                            'utnfrro_SistemaAlumnado_nivelPermisos' => $userRow->nivelPermiso,
-                        ]);
+                        //'utnfrro_'.Sistema.'_user_login_session'
+                        //session([
+                        //    "utnfrro_".$Sistema."_user_login_session" => true,
+                        //    "utnfrro_".$Sistema."_idUsuario" => $userRow->id,
+                        //    "utnfrro_".$Sistema."_USERNAME" => $userRow->userName,
+                        //    "utnfrro_".$Sistema."_nombre" => $userRow->nombre,
+                        //    "utnfrro_".$Sistema."_apellido" => $userRow->apellido,
+                        //    "utnfrro_".$Sistema."_nivelPermisos" => $userRow->nivelPermiso,
+                        //]);
+                        //Nivel Permisos
+                        //0 = Vista
+                        //1 = Escritura
+                        //2 = SuperAdmin
 
                         return response()->json([
                             'success' => true,
-                            'message' => 'Autenticación exitosa.'
+                            'message' => 'Autenticación exitosa.',
+                            'url'     => $Landing
                         ], 200);
                     } else {
                         return response()->json([
@@ -99,7 +119,7 @@ class LdapAuthController extends Controller
             // Manejar la excepción y devolver un mensaje limpio
             return response()->json([
                 'success' => false,
-                'message' => 'Ocurrió un error al procesar la solicitud',
+                'message' => 'Ocurrió un error al procesar la solicitud #100',
                 'error' => $e->getMessage(), // Esto incluye el mensaje detallado del error
             ], 400);
         }

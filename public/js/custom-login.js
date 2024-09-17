@@ -78,7 +78,7 @@ async function enviarLogin() {
        if (respuesta.ok) {
           console.log('Login correcto:', data);
           // Puedes redirigir o realizar alguna acción en caso de éxito
-          window.location.href = '/proceso.php?op=home';
+          window.location.href = data.url;
        } else {
           //const data = await respuesta.json(); // Procesamos la respuesta en formato JSON
           //console.error('Error en la solicitud:' + respuesta.message + respuesta.error , respuesta.status);
