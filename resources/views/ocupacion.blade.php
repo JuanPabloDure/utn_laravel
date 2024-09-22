@@ -54,7 +54,7 @@
 
                     <div class="card-body bg-white">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover" id="tablaOcupacion">
+                            <table class="table table-striped table-hover" id="tablaOcupacion" style="border-collapse: collapse; width: 100%;">
                                 
                             </table>
                         </div>
@@ -72,6 +72,18 @@
 @section('css')
     {{-- Add here extra stylesheets --}}
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <style>
+    /* Estilos para los bordes de las celdas */
+    table#tablaOcupacion td, table#tablaOcupacion th {
+        border: 1px solid #010101; /* Color negro para los bordes */
+        padding: 8px; /* Añadir algo de padding para mejor legibilidad */
+    }
+
+    /* Estilo opcional para centrar el contenido de las celdas */
+    table#tablaOcupacion td {
+        text-align: center;
+    }
+</style>
 @stop
 
 @section('js')
@@ -84,6 +96,7 @@
             seleccionarTipo();
             addNotification("Se selecciono el turno y dia correspondiente puede cambiarlo")
             realizarConsulta();
+            document.getElementById('TurnoFiltro').addEventListener('input', realizarConsulta);
         });
 
 

@@ -41,16 +41,24 @@ class ConsultaHomeController extends Controller
             'turno' => 'required|integer',
         ]);
         
-
-        $query = Evento::query();
         $Hquery = Horario::query();
         $Aquery = Aula::query();
 
 
+        $horario = $Hquery->whereNotIn('hora', ['PH', 'PPH']);
+        if ($request->turno != 0) {
+            $Hquery->where('idTurno', $request->turno);
+        }
 
-        $eventos = $query->get();
         $horario = $Hquery->get();
         $aula = $Aquery->get();
+
+        // Usamos join para traer los nombres de las materias en la misma consulta
+        $eventos = Evento::query()
+        ->join('materias', 'eventos.idMateria', '=', 'materias.idMateria')
+        ->select('eventos.*', 'materias.nombre as nombre_materia')
+        ->get();
+        
 
         return response()->json([
             'eventos' => $eventos,
