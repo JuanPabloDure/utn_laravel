@@ -250,36 +250,36 @@
 
 
         function generarTablaOcupacion(data) {
-        const tabla = document.getElementById("tablaOcupacion");
-        
-        // Crear la fila de encabezados con los turnos
-        let thead = '<thead><tr><th>Aulas / Turnos</th>';
-        data.turnos.forEach(turno => {
-            thead += `<th>${turno.rangoHorario}</th>`;
-        });
-        thead += '</tr></thead>';
-        tabla.innerHTML = thead;
-
-        // Crear las filas para las aulas
-        let tbody = '<tbody>';
-        data.aulas.forEach(aula => {
-            tbody += `<tr><td>${aula.name}</td>`;
+            const tabla = document.getElementById("tablaOcupacion");
+            
+            // Crear la fila de encabezados con los turnos
+            let thead = '<thead><tr><th>Aulas / Turnos</th>';
             data.turnos.forEach(turno => {
-                // Encontrar si hay un evento para este aula y turno
-                const evento = data.eventos.find(e => e.aula_id === aula.id && e.idHorario === turno.idHorario);
-
-                // Marcar la celda como "Ocupado" si hay un evento, sino "Libre"
-                if (evento) {
-                    tbody += `<td>Ocupado - ${evento.tipo}</td>`;
-                } else {
-                    tbody += `<td>Libre</td>`;
-                }
+                thead += `<th>${turno.rangoHorario}</th>`;
             });
-            tbody += '</tr>';
-        });
-        tbody += '</tbody>';
-        tabla.innerHTML += tbody;
-    }
+            thead += '</tr></thead>';
+            tabla.innerHTML = thead;
+
+            // Crear las filas para las aulas
+            let tbody = '<tbody>';
+            data.aulas.forEach(aula => {
+                tbody += `<tr><td>${aula.name}</td>`;
+                data.turnos.forEach(turno => {
+                    // Encontrar si hay un evento para este aula y turno
+                    const evento = data.eventos.find(e => e.aula_id === aula.id && e.idHorario === turno.idHorario);
+
+                    // Marcar la celda como "Ocupado" si hay un evento, sino poner fondo verde claro
+                    if (evento) {
+                        tbody += `<td style="background-color:  #ffff00;">${evento.nombre_materia}</td>`;
+                    } else {
+                        tbody += `<td style="background-color: #d4edda;"></td>`;
+                    }
+                });
+                tbody += '</tr>';
+            });
+            tbody += '</tbody>';
+            tabla.innerHTML += tbody;
+        }
 
 
 
