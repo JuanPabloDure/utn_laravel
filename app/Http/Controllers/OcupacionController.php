@@ -37,11 +37,12 @@ class OcupacionController extends Controller
      */
     public function index()
     {
+        $usuario = auth()->user();//Usuario actual tiene que estar logueado para si lo usas q no romapa
         $eventos = Evento::all();
         $aulas = Aula::all();
         $docentes = Docente::all();
         $horarios = Horario::all();
         $materias = Materia::all();
-        return view('ocupacion', compact('eventos','aulas','docentes','horarios','materias'));
+        return view('ocupacion', compact('eventos','aulas','docentes','horarios','materias','usuario'));
     }
 }

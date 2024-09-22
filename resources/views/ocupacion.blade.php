@@ -14,87 +14,53 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                                <div class="form-group mb-4 mb20" style="display: flex; align-items: center;">  
-                                    <label for="idDocente" class="form-label" style="margin-right: 10px;">Docente: </label>
-                                    <select name="idDocente" id="idDocente" class="form-control @error('idDocente') is-invalid @enderror">
-                                        <option value="0">Selecione un docente</option>
-                                        @foreach ($docentes as $docente)    
-                                            <option value="{{ $docente->idDocente }}">{{ $docente->apellido}}, {{ $docente->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                                 <div class="form-group mb-4 mb20" style="display: flex; align-items: center;">
-                                    <label for="idMateria" class="form-label" style="margin-right: 10px;">Materia: </label>
-                                    <select  name="idMateria" class="form-control" id="idMateria">
-                                        <option value="0">Selecione una materia</option>
-                                        @foreach ($materias as $mat)    
-                                            <option value="{{ $mat->idMateria }}">{{ $mat->nombre}}</option>
-                                        @endforeach
+                                    <label for="dias_semana" class="form-label" style="margin-right: 10px;">Dia</label>
+                                    <select name="dia_semana" id="dia_semana" class="form-control" required>
+                                        <option value="Lunes">Lunes</option>
+                                        <option value="Martes">Martes</option>
+                                        <option value="Miércoles">Miércoles</option>
+                                        <option value="Jueves">Jueves</option>
+                                        <option value="Viernes">Viernes</option>
+                                        <option value="Sábado">Sábado</option>
+                                        <option value="Domingo">Domingo</option>
                                     </select>
                                 </div>
-                                <div class="form-group mb-2 mb20" style="display: flex; align-items: center;">
-                                    <label for="aula_id" class="form-label" style="margin-right: 10px;">Aula:</label>
-                                    <select id="aula_id" name="aula_id" class="form-control" style="margin-right: 10px;" >
-                                        <option value="0">Selecione un aula</option>
-                                        @foreach ($aulas as $aula)    
-                                            <option value="{{ $aula->id }}">{{ $aula->name}}</option>
-                                        @endforeach
+
+                                <div class="form-group mb-4 mb20" style="display: flex; align-items: center;">
+                                    <label for="TurnoFiltro" class="form-label" style="margin-right: 10px;">Turno</label>
+                                    <select name="TurnoFiltro" id="TurnoFiltro" class="form-control" required>
+                                        <option value="0">Todos</option>
+                                        <option value="1">Mañana</option>
+                                        <option value="2">Tarde</option>
+                                        <option value="3">Noche</option>
                                     </select>
                                 </div>
+
+                                <div class="form-group mb-4 mb20" style="display: flex; align-items: center;">
+                                    <label for="tipo"  class="form-label" style="margin-right: 10px;">Tipo</label>
+                                    <select name="tipo" id="tipo" class="form-control"  required>
+                                        <option value="anual">Anual</option>
+                                        <option value="primer">Primer Semestre</option>
+                                        <option value="segundo">Segundo Semestre</option>
+                                    </select>
+                                </div>
+
                             </div>
-                            <!--<div class="float-right">
-                                <button class="btn btn-sm btn-primary"> Buscar</button>
-                            </div>-->
+
                         </div>
                         <div id="resultados"></div>
                     </div>
 
                     <div class="card-body bg-white">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th></th>
-                                        <th>Lunes</th>    
-                                        <th>Martes</th>
-                                        <th>Miércoles</th>
-                                        <th>Jueves</th>
-                                        <th>Viernes</th>
-                                        <th>Sábado</th>
-                                        <th>Domingo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($horarios as $horario)
-                                        <tr>
-                                            <td >{{ $horario->rangoHorario }}</td>
-                                            <td >
-                                                <div dub="calendario" dia="Lunes" hora="{{ $horario->idHorario }}"> - </div>
-                                            </td>
-                                            <td >
-                                                <div dub="calendario" dia="Martes" hora="{{ $horario->idHorario }}"> - </div>
-                                            </td>
-                                            <td >
-                                                <div dub="calendario"  dia="Miércoles" hora="{{ $horario->idHorario }}"> - </div>
-                                            </td>
-                                            <td >
-                                                <div dub="calendario"  dia="Jueves" hora="{{ $horario->idHorario }}"> - </div>
-                                            </td>
-                                            <td >
-                                                <div dub="calendario"  dia="Viernes" hora="{{ $horario->idHorario }}"> - </div>
-                                            </td>
-                                            <td >
-                                                <div dub="calendario"  dia="Sábado" hora="{{ $horario->idHorario }}"> - </div>
-                                            </td>
-                                            <td >
-                                                <div dub="calendario"  dia="Domingo" hora="{{ $horario->idHorario }}"> - </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                            <table class="table table-striped table-hover" id="tablaOcupacion">
+                                
                             </table>
                         </div>
                     </div>
+
+                    <div id="notificationsContainer" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>
     
                 </div>
             </div>
@@ -109,145 +75,187 @@
 @stop
 
 @section('js')
-    <script>
+<script>
+        ///CARGA LA PAGINA E INICIAMOS AUTOMATISMOS
+        document.addEventListener('DOMContentLoaded', function() {
+            ocultarElemento()
+            seleccionarTurno();
+            seleccionarDiaHoy();
+            seleccionarTipo();
+            addNotification("Se selecciono el turno y dia correspondiente puede cambiarlo")
+            realizarConsulta();
+        });
+
+
         function ocultarElemento() {
             var elemento = document.querySelector('.nav-link[data-widget="navbar-search"]');
             if (elemento) {
                 elemento.style.display = 'none';
             }
-            }
+        }
+        
 
-            document.addEventListener("DOMContentLoaded", function() {
-                ocultarElemento()
-            });
+        function addNotification(message, type = 'info') {
+            // Crea un nuevo elemento de alerta
+            const alertDiv = $(`
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert" style="margin-bottom: 10px;">
+                    ${message}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            `);
 
-            
+            // Agrega la alerta al contenedor
+            $('#notificationsContainer').prepend(alertDiv);
 
-    document.addEventListener('DOMContentLoaded', function() {
-    
-    const idMateriaSelect = document.getElementById('idMateria');
-    const idDocenteSelect = document.getElementById('idDocente');
-    const resultadosDiv = document.getElementById('resultados');
+            // Opcional: Remueve la alerta después de 5 segundos
+            setTimeout(() => {
+                alertDiv.alert('close');
+            }, 5000);
+        }
 
-    function realizarConsulta() {
-        const idMateria = idMateriaSelect.value;
-        const idDocente = idDocenteSelect.value;
-        resetearContenidoACalendarios()
+        function realizarConsulta() {
+            const diaSelect = document.getElementById('dia_semana');
+            const TurnoSelect = document.getElementById('TurnoFiltro');
+            const dia = diaSelect.value;
+            const turno = parseInt(TurnoSelect.value,10);
 
-        fetch('/api_v1/consulta_home', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({
-                idMateria: idMateria,
-                idDocente: idDocente
+
+            fetch('/api_v1/consulta_ocupacion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    turno: turno,
+                    dia: dia
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Lógica para redibujar la vista con los datos recibidos
-            resultadosDiv.innerHTML = '';
+            .then(response => response.json())
+            .then(data => {
+                // Lógica para redibujar la vista con los datos recibidos
+                //resultadosDiv.innerHTML = '';
+                console.log(data)
+                if (data.data.length === 0) {
+                    //resultadosDiv.textContent = data.message; // Muestra el mensaje si no hay resultados
+                    addNotification(data.message,"warning");
+                } else {
+                    addNotification(data.message,"success");
+                    data.data.forEach(evento => {
+                        console.log(evento)
+                        //let aula    = "Aula : " + obtenerTextoDeSeleccion("aula_id",evento.aula_id) + " " + evento.dia_semana
+                        let tipo    = "Semestre : " + evento.tipo
+                        let nota    = evento.nota ? "Nota : " + evento.nota : null;
+                    });
 
-            if (data.data.length === 0) {
-                resultadosDiv.textContent = data.message; // Muestra el mensaje si no hay resultados
-            } else {
-                data.data.forEach(evento => {
-                    console.log(evento)
-                    let materia = obtenerTextoDeSeleccion("idMateria",evento.idMateria)
-                    let docente = obtenerTextoDeSeleccion("idDocente",evento.idDocente)
-                    let aula    = "Aula : " + obtenerTextoDeSeleccion("aula_id",evento.aula_id) + " " + evento.dia_semana
-                    let tipo    = "Semestre : " + evento.tipo
-                    let nota    = evento.nota ? "Nota : " + evento.nota : null;
-                    limpiarYCrearDiv(materia, [docente,aula,tipo], evento.dia_semana, evento.idHorario )
-                });
-                //////////////////////////////COMENTAR EN PRODUCCION//////////////////////////////////////////
-                const eventoElement = document.createElement('div');
-                eventoElement.textContent = "Se encontraron resultados";
-                resultadosDiv.appendChild(eventoElement);
-                ////////////////////////////////////////////////////////////////////////////////////////////
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
-
-    idMateriaSelect.addEventListener('change', realizarConsulta);
-    idDocenteSelect.addEventListener('change', realizarConsulta);
-    });
-
-    function obtenerTextoDeSeleccion(idSelect, Valor) {
-        // Encuentra el elemento select por su ID
-        let valor = Valor.toString();
-        const selectElement = document.getElementById(idSelect);
-        //console.log(idSelect + " "+ valor)
-
-        // Busca el option que tenga el valor especificado
-        const option = Array.from(selectElement.options).find(option => option.value === valor);
-        // Devuelve el texto del option encontrado o un mensaje por defecto
-        return option ? option.textContent : 'Opción no encontrada';
-    }
-
-    function limpiarYCrearDiv(titulo, texto, dia, hora) {
-        // Selecciona todos los divs con los atributos especificados
-        const divs = document.querySelectorAll(`div[dia="${dia}"][hora="${hora}"]`);
-
-        // Elimina los divs encontrados
-        //divs.forEach(div => div.textContent = '');
-        divs.forEach(div => {
-            if (div.textContent === '-') {
-                div.textContent = '';
-            }
-        });
-        //Lo movi a otra funcion mira a bajo
-
-        // Crea un nuevo div
-        const nuevoDiv = document.createElement('div');
-        nuevoDiv.style.backgroundColor = generarColorClaroAleatorio(); // Aplica el color de fondo
-        nuevoDiv.style.borderRadius = '10px'; // Redondea los bordes del div
-        nuevoDiv.style.padding = '10px'; // Añade un poco de espacio interno (opcional)
-        // Crea el título
-        const h5 = document.createElement('h5');
-        h5.textContent = titulo;
-        // Estilo para limitar a 20 caracteres por línea
-        h5.style.width = '20ch';  // Limita el ancho del contenedor a 20 caracteres
-        h5.style.whiteSpace = 'normal';  // Permite que el texto se envuelva en nuevas líneas
-        h5.style.wordWrap = 'break-word';  // Corta palabras si es necesario para ajustarse al ancho
-        // Añade el título y el texto al nuevo div
-        nuevoDiv.appendChild(h5);
-        //Añado las lineas de texto
-        texto.forEach(Texto => {
-            let h8 = document.createElement('span');
-            h8.textContent = Texto;
-            h8.style.display = 'block'; // Forzar que cada span ocupe una línea
-            if (Texto) {
-                nuevoDiv.appendChild(h8);
-            }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error)
+                addNotification("Se encontro un error al hacer la consulta de tabla","danger")
             });
+        }
 
-        // Añade el nuevo div al body (o a un contenedor específico)
-        divs.forEach(div => div.appendChild(nuevoDiv));
-        //document.body.appendChild(nuevoDiv);
-    }
+        function obtenerTextoDeSeleccion(idSelect, Valor) {
+            // Encuentra el elemento select por su ID
+            let valor = Valor.toString();
+            const selectElement = document.getElementById(idSelect);
+            //console.log(idSelect + " "+ valor)
 
-    function resetearContenidoACalendarios() {
-        // Selecciona todos los divs con el atributo dub="calendario"
-        const calendarios = document.querySelectorAll('div[dub="calendario"]');
+            // Busca el option que tenga el valor especificado
+            const option = Array.from(selectElement.options).find(option => option.value === valor);
+            // Devuelve el texto del option encontrado o un mensaje por defecto
+            return option ? option.textContent : 'Opción no encontrada';
+        }
 
-        // Reemplaza el contenido de cada div con un "-"
-        calendarios.forEach(div => {
-            div => div.remove() //Elimino las busquedas anteriores
-            div.textContent = '-';//Pongo el mismo texto defecto que puse en php
-        });
-    }
+        function seleccionarDiaHoy() {
+            // Definir un array con los días de la semana
+            const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+            
+            // Obtener la fecha actual ajustada a UTC-3
+            const hoyUTC3 = new Date(new Date().getTime() - (3 * 60 * 60 * 1000)); // Restar 3 horas para UTC-3
+            
+            // Obtener el día de la semana (0 es Domingo, 1 es Lunes, etc.)
+            const diaHoy = hoyUTC3.getDay();
+            
+            // Seleccionar el día correspondiente en el select
+            const selectDiaSemana = document.getElementById('dia_semana');
+            selectDiaSemana.value = diasSemana[diaHoy];
+        }
 
-    function generarColorClaroAleatorio() {
-        const r = Math.floor(Math.random() * 156) + 100; // Rango de 100 a 255
-        const g = Math.floor(Math.random() * 156) + 100; // Rango de 100 a 255
-        const b = Math.floor(Math.random() * 156) + 100; // Rango de 100 a 255
+        function seleccionarTurno() {
+            // Definir los turnos con sus horas de inicio y fin
+            const turnos = [
+                { id: 1, nombre: 'Mañana', inicio: '07:15', fin: '13:35' },
+                { id: 2, nombre: 'Tarde', inicio: '12:50', fin: '19:15' },
+                { id: 3, nombre: 'Noche', inicio: '18:35', fin: '00:10' }
+            ];
+            
+            // Obtener la fecha actual ajustada a UTC-3
+            const ahoraUTC3 = new Date(new Date().getTime() - (3 * 60 * 60 * 1000));
+            const horaActual = ahoraUTC3.getHours();
+            const minutosActual = ahoraUTC3.getMinutes();
+            
+            // Función para convertir la hora a minutos (para facilitar la comparación)
+            function horaEnMinutos(hora) {
+                const [h, m] = hora.split(':').map(Number);
+                return h * 60 + m;
+            }
+            
+            // Convertir la hora actual a minutos
+            const minutosActuales = horaActual * 60 + minutosActual;
+            
+            // Variable para almacenar el turno encontrado
+            let turnoSeleccionado = 0; // Por defecto es "Todos"
 
-        return `rgb(${r}, ${g}, ${b})`;
-    }
+            // Recorrer los turnos para encontrar el turno correspondiente
+            turnos.forEach(turno => {
+                const inicioMinutos = horaEnMinutos(turno.inicio);
+                let finMinutos = horaEnMinutos(turno.fin);
+                
+                // Si el turno termina después de la medianoche, ajustamos el rango
+                if (finMinutos < inicioMinutos) {
+                    finMinutos += 24 * 60; // Sumar 24 horas para ajustar
+                }
+                
+                if (minutosActuales >= inicioMinutos && minutosActuales <= finMinutos) {
+                    turnoSeleccionado = turno.id;
+                }
+            });
+            
+            // Seleccionar el turno correspondiente en el select
+            const selectTurno = document.getElementById('TurnoFiltro');
+            selectTurno.value = turnoSeleccionado;
+        }
+
+        function seleccionarTipo() {
+            // Obtener la fecha actual
+            const fechaActual = new Date();
+            
+            // Obtener el mes actual (0 = Enero, 11 = Diciembre)
+            const mesActual = fechaActual.getMonth();
+            
+            // Variable para almacenar el tipo de semestre seleccionado
+            let tipoSeleccionado = 'anual'; // Por defecto es "Anual"
+
+            // Determinar el semestre según el mes
+            if (mesActual >= 0 && mesActual <= 5) {
+                // De enero (0) a junio (5), corresponde al "Primer Semestre"
+                tipoSeleccionado = 'primer';
+            } else if (mesActual >= 6 && mesActual <= 11) {
+                // De julio (6) a diciembre (11), corresponde al "Segundo Semestre"
+                tipoSeleccionado = 'segundo';
+            }
+
+            // Seleccionar el tipo correspondiente en el select
+            const selectTipo = document.getElementById('tipo');
+            selectTipo.value = tipoSeleccionado;
+        }
+
+    
+
 
     </script>
 @stop

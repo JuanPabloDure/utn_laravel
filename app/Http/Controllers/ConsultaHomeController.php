@@ -31,4 +31,21 @@ class ConsultaHomeController extends Controller
             'message' => $eventos->isEmpty() ? 'No se encontraron eventos' : 'Eventos encontrados',
         ]);
     }
+
+    public function ocupacion(Request $request)
+    {
+        
+        
+
+        $query = Evento::query();
+
+
+
+        $eventos = $query->get();
+
+        return response()->json([
+            'data' => $eventos,
+            'message' => $eventos->isEmpty() ? 'No se encontraron eventos' : 'Eventos encontrados',
+        ]);
+    }
 }
