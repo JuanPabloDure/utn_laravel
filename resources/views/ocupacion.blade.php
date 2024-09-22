@@ -39,10 +39,10 @@
 
                                 <div class="form-group mb-4 mb20" style="display: flex; align-items: center;">
                                     <label for="tipo"  class="form-label" style="margin-right: 10px;">Tipo</label>
-                                    <select name="tipo" id="tipo" class="form-control"  required>
+                                    <select name="tipo" id="tipoSemestre" class="form-control"  required>
                                         <option value="anual">Anual</option>
-                                        <option value="primer">Primer Semestre</option>
-                                        <option value="segundo">Segundo Semestre</option>
+                                        <option value="primer">Primer Semestre + Anual</option>
+                                        <option value="segundo">Segundo Semestre + Anual</option>
                                     </select>
                                 </div>
 
@@ -97,6 +97,8 @@
             addNotification("Se selecciono el turno y dia correspondiente puede cambiarlo")
             realizarConsulta();
             document.getElementById('TurnoFiltro').addEventListener('input', realizarConsulta);
+            document.getElementById('tipoSemestre').addEventListener('input', realizarConsulta);
+            document.getElementById('dia_semana').addEventListener('input', realizarConsulta);
         });
 
 
@@ -133,6 +135,11 @@
             const TurnoSelect = document.getElementById('TurnoFiltro');
             const dia = diaSelect.value;
             const turno = parseInt(TurnoSelect.value,10);
+            let seme = document.getElementById('tipoSemestre');
+            let semestre = false; 
+            if (seme){
+                semestre = seme.value; 
+            }
 
 
             fetch('/api_v1/consulta_ocupacion', {
@@ -143,7 +150,8 @@
                 },
                 body: JSON.stringify({
                     turno: turno,
-                    dia: dia
+                    dia: dia,
+                    semestre :semestre
                 })
             })
             .then(response => response.json())
@@ -257,7 +265,7 @@
             }
 
             // Seleccionar el tipo correspondiente en el select
-            const selectTipo = document.getElementById('tipo');
+            const selectTipo = document.getElementById('tipoSemestre');
             selectTipo.value = tipoSeleccionado;
         }
 
