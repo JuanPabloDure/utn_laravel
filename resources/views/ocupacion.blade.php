@@ -294,7 +294,7 @@
 
                     // Marcar la celda como "Ocupado" si hay un evento, sino poner fondo verde claro
                     if (evento) {
-                        tbody += `<td style="background-color:  #ffff00;">${evento.nombre_materia}</td>`;
+                        tbody += `<td style="background-color:  #ffff00;">${evento.nombre_materia} ${evento.nombre_docente} ${evento.apellido_docente}</td>`;
                     } else {
                         tbody += `<td style="background-color: #d4edda;"></td>`;
                     }

@@ -58,7 +58,13 @@ class ConsultaHomeController extends Controller
         // Usamos join para traer los nombres de las materias en la misma consulta
         $eventosQ = Evento::query()
         ->join('materias', 'eventos.idMateria', '=', 'materias.idMateria')
-        ->select('eventos.*', 'materias.nombre as nombre_materia')
+        ->join('docentes', 'eventos.idDocente', '=', 'docentes.idDocente')
+        ->select(
+        'eventos.*', 
+        'materias.nombre as nombre_materia', 
+        'docentes.nombre as nombre_docente', 
+        'docentes.apellido as apellido_docente'
+        )
         ->whereIn('idHorario', $idHorarios);
         
         if ($request->dia != "TODO") {
