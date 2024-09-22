@@ -138,18 +138,12 @@
                 // Lógica para redibujar la vista con los datos recibidos
                 //resultadosDiv.innerHTML = '';
                 console.log(data)
-                if (data.data.length === 0) {
+                if (data.eventos.length === 0) {
                     //resultadosDiv.textContent = data.message; // Muestra el mensaje si no hay resultados
                     addNotification(data.message,"warning");
                 } else {
                     addNotification(data.message,"success");
-                    data.data.forEach(evento => {
-                        console.log(evento)
-                        //let aula    = "Aula : " + obtenerTextoDeSeleccion("aula_id",evento.aula_id) + " " + evento.dia_semana
-                        let tipo    = "Semestre : " + evento.tipo
-                        let nota    = evento.nota ? "Nota : " + evento.nota : null;
-                    });
-
+                    generarTablaOcupacion(data)
                 }
             })
             .catch(error => {
@@ -253,6 +247,41 @@
             const selectTipo = document.getElementById('tipo');
             selectTipo.value = tipoSeleccionado;
         }
+
+
+        function generarTablaOcupacion(data) {
+        const tabla = document.getElementById("tablaOcupacion");
+        
+        // Crear la fila de encabezados con los turnos
+        let thead = '<thead><tr><th>Aulas / Turnos</th>';
+        data.turnos.forEach(turno => {
+            thead += `<th>${turno.rangoHorario}</th>`;
+        });
+        thead += '</tr></thead>';
+        tabla.innerHTML = thead;
+
+        // Crear las filas para las aulas
+        let tbody = '<tbody>';
+        data.aulas.forEach(aula => {
+            tbody += `<tr><td>${aula.name}</td>`;
+            data.turnos.forEach(turno => {
+                // Encontrar si hay un evento para este aula y turno
+                const evento = data.eventos.find(e => e.aula_id === aula.id && e.idHorario === turno.idHorario);
+
+                // Marcar la celda como "Ocupado" si hay un evento, sino "Libre"
+                if (evento) {
+                    tbody += `<td>Ocupado - ${evento.tipo}</td>`;
+                } else {
+                    tbody += `<td>Libre</td>`;
+                }
+            });
+            tbody += '</tr>';
+        });
+        tbody += '</tbody>';
+        tabla.innerHTML += tbody;
+    }
+
+
 
     
 

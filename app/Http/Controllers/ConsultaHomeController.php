@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Evento;
+use App\Models\Horario;
+use App\Models\Aula;
 
 class ConsultaHomeController extends Controller
 {
@@ -34,17 +36,26 @@ class ConsultaHomeController extends Controller
 
     public function ocupacion(Request $request)
     {
-        
+        $request->validate([
+            'dia' => 'required|string',
+            'turno' => 'required|integer',
+        ]);
         
 
         $query = Evento::query();
+        $Hquery = Horario::query();
+        $Aquery = Aula::query();
 
 
 
         $eventos = $query->get();
+        $horario = $Hquery->get();
+        $aula = $Aquery->get();
 
         return response()->json([
-            'data' => $eventos,
+            'eventos' => $eventos,
+            'turnos' => $horario,
+            'aulas' => $aula,
             'message' => $eventos->isEmpty() ? 'No se encontraron eventos' : 'Eventos encontrados',
         ]);
     }
