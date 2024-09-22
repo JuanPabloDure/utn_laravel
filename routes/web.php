@@ -23,7 +23,8 @@ Route::resource('materias', App\Http\Controllers\MateriaController::class);
 Route::resource('eventos', App\Http\Controllers\EventoController::class);
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/ocupaciodocente', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\OcupacionController::class, 'index'])->name('home');
 
 Route::middleware('auth')->post('/api_v1/consulta_home', [ConsultaHomeController::class, 'consulta']);
 
