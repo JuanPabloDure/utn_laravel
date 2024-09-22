@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('eventos', function (Blueprint $table) {
-            $table->unsignedBigInteger('idMateria');
-            $table->foreign('idMateria')->references('idMateria')->on('materias')->onDelete('cascade');
-        });
+        /** 
+         *Schema::table('eventos', function (Blueprint $table) {
+         *$table->unsignedBigInteger('idMateria');
+         *$table->foreign('idMateria')->references('idMateria')->on('materias')->onDelete('cascade');
+         *}); 
+        */
+        
     }
 
     /**
