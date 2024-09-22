@@ -17,6 +17,7 @@
                                 <div class="form-group mb-4 mb20" style="display: flex; align-items: center;">
                                     <label for="dias_semana" class="form-label" style="margin-right: 10px;">Dia</label>
                                     <select name="dia_semana" id="dia_semana" class="form-control" required>
+                                        <option value="TODO"></option>
                                         <option value="Lunes">Lunes</option>
                                         <option value="Martes">Martes</option>
                                         <option value="Miércoles">Miércoles</option>
@@ -40,6 +41,7 @@
                                 <div class="form-group mb-4 mb20" style="display: flex; align-items: center;">
                                     <label for="tipo"  class="form-label" style="margin-right: 10px;">Tipo</label>
                                     <select name="tipo" id="tipoSemestre" class="form-control"  required>
+                                        <option value="todos"></option>
                                         <option value="anual">Anual</option>
                                         <option value="primer">Primer Semestre + Anual</option>
                                         <option value="segundo">Segundo Semestre + Anual</option>
@@ -162,10 +164,11 @@
                 if (data.eventos.length === 0) {
                     //resultadosDiv.textContent = data.message; // Muestra el mensaje si no hay resultados
                     addNotification(data.message,"warning");
+
                 } else {
                     addNotification(data.message,"success");
-                    generarTablaOcupacion(data)
                 }
+                generarTablaOcupacion(data)
             })
             .catch(error => {
                 console.error('Error:', error)
@@ -274,7 +277,7 @@
             const tabla = document.getElementById("tablaOcupacion");
             
             // Crear la fila de encabezados con los turnos
-            let thead = '<thead><tr><th>Aulas / Turnos</th>';
+            let thead = '<thead><tr><th>Turnos / Aulas</th>';
             data.turnos.forEach(turno => {
                 thead += `<th>${turno.rangoHorario}</th>`;
             });

@@ -54,16 +54,27 @@ class ConsultaHomeController extends Controller
         $aula = $Aquery->get();
 
         $idHorarios = $Hquery->pluck('idHorario')->toArray();
-        //$idHorarios = array_map(function($item) {
-        //    return $item->idHorario; // Reemplaza `idHorario` con el nombre real de la propiedad
-        //}, $horario);
 
         // Usamos join para traer los nombres de las materias en la misma consulta
-        $eventos = Evento::query()
+        $eventosQ = Evento::query()
         ->join('materias', 'eventos.idMateria', '=', 'materias.idMateria')
         ->select('eventos.*', 'materias.nombre as nombre_materia')
-        ->whereIn('idHorario', $idHorarios)
-        ->get();
+        ->whereIn('idHorario', $idHorarios);
+        
+        if ($request->dia != "TODO") {
+            $eventosQ->where('dia_semana', $request->dia);
+        }
+        if ($request->semestre == "anual") {
+            $eventosQ->where('tipo', $request->semestre);
+        }
+        if ($request->semestre == "primer") {
+            $eventosQ->whereIn('tipo', [$request->semestre,"anual"]);
+        }
+        if ($request->semestre == "segundo") {
+            $eventosQ->whereIn('tipo', [$request->semestre,"anual"]);
+        }
+        
+        $eventos = $eventosQ->get();
         
 
         return response()->json([
